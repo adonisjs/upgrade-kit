@@ -1,6 +1,7 @@
 import { ImportDeclaration } from 'ts-morph'
 import { PatcherFactory } from '../../types/index.js'
 import { BasePatcher } from '../base_patcher.js'
+import { extname } from 'node:path'
 
 export function addJsExtensions(): PatcherFactory {
   return (runner) => new AddJsExtensions(runner)
@@ -36,9 +37,9 @@ export class AddJsExtensions extends BasePatcher {
         const moduleSpecifier = importNode.getModuleSpecifierValue()
 
         const isRelativeImport = moduleSpecifier.startsWith('.')
-        const hasJsExtension = moduleSpecifier.endsWith('.js')
+        const hasExtension = !!extname(moduleSpecifier)
 
-        if (!isRelativeImport || hasJsExtension) {
+        if (!isRelativeImport || hasExtension) {
           continue
         }
 

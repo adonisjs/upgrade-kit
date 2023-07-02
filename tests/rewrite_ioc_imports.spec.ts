@@ -126,4 +126,59 @@ test.group('Rewrite Ioc Imports', () => {
       `
     )
   })
+
+  test('rewrite default import', async ({ assert, fs }) => {
+    await fs.addTsConfig()
+
+    await fs.create(
+      'index.ts',
+      dedent`
+        import Event, { AnyHandler } from '@ioc:Adonis/Core/Event'
+        import Logger, { Formatters } from '@ioc:Adonis/Core/Logger'
+
+        console.log(Event, AnyHandler, Logger, Formatters)
+      `
+    )
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [
+        rewriteIocImports({
+          importMap: {
+            '@ioc:Adonis/Core/Event': {
+              'default': {
+                newPath: '@adonisjs/core/services/emitter',
+                newName: 'emitter',
+              },
+              '*': {
+                newPath: '@adonisjs/core/events',
+              },
+            },
+            '@ioc:Adonis/Core/Logger': {
+              default: {
+                newPath: '@adonisjs/core/services/logger',
+                newName: 'logger',
+              },
+              Formatters: {
+                newName: 'FormattersNewName',
+                newPath: '@adonisjs/core/logger',
+              },
+            },
+          },
+        }),
+      ],
+    }).run()
+
+    await assert.fileEquals(
+      'index.ts',
+      dedent`
+        import emitter from '@adonisjs/core/services/emitter'
+        import logger from '@adonisjs/core/services/logger'
+        import { AnyHandler } from "@adonisjs/core/events";
+        import { FormattersNewName } from "@adonisjs/core/logger";
+
+        console.log(emitter, AnyHandler, logger, FormattersNewName)
+      `
+    )
+  })
 })

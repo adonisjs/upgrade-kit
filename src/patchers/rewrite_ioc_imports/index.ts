@@ -92,6 +92,14 @@ export class RewriteIocImports extends BasePatcher {
     }
 
     /**
+     * Update default import if needed
+     */
+    const defaultImport = importDeclaration.getDefaultImport()
+    if (defaultImport && this.#importMapper.shouldMoveDefaultImport(mod)) {
+      defaultImport.rename(this.#importMapper.getNewDefaultImportName(mod)!)
+    }
+
+    /**
      * Then we start analyzing the named imports
      */
     const namedImports = importDeclaration.getNamedImports()
@@ -106,6 +114,17 @@ export class RewriteIocImports extends BasePatcher {
         this.#renameNamedImport(mod, namedImport)
         continue
       }
+    }
+
+    /**
+     * If updated import declaration has no named imports or default import
+     * then we remove it
+     */
+    const hasNamedImports = importDeclaration.getNamedImports().length > 0
+    const hasDefaultImport = !!importDeclaration.getDefaultImport()
+
+    if (!hasNamedImports && !hasDefaultImport) {
+      importDeclaration.remove()
     }
   }
 

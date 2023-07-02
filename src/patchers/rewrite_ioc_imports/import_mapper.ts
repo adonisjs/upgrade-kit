@@ -24,7 +24,7 @@ export class ImportMapper {
     return (
       this.shouldBeRewritten(oldModule) &&
       Object.keys(this.#importsMapping[oldModule]).length === 1 &&
-      !!this.#importsMapping[oldModule]['*']
+      (!!this.#importsMapping[oldModule]['*'] || !!this.#importsMapping[oldModule]['default'])
     )
   }
 
@@ -36,9 +36,25 @@ export class ImportMapper {
   }
 
   /**
+   * If the default import is moved to a new module
+   */
+  shouldMoveDefaultImport(oldModule: string) {
+    return (
+      this.shouldBeRewritten(oldModule) &&
+      !!this.#importsMapping[oldModule]['default'] &&
+      !!this.#importsMapping[oldModule]['default'].newPath
+    )
+  }
+
+  /**
    * If the given named import should be moved to a new module
    */
   shouldMoveNamedImport(oldModule: string, namedImport: string) {
+    const shouldMoveDefaultImport = this.shouldMoveDefaultImport(oldModule)
+    if (shouldMoveDefaultImport) {
+      return true
+    }
+
     return (
       this.shouldBeRewritten(oldModule) &&
       !!this.#importsMapping[oldModule][namedImport] &&
@@ -57,15 +73,31 @@ export class ImportMapper {
    * Returns the new name for the given named import
    */
   getNewNamedImportName(oldModule: string, namedImport: string) {
-    return this.#importsMapping[oldModule][namedImport].newName
+    return this.#importsMapping[oldModule][namedImport]?.newName
+  }
+
+  /**
+   * Returns the new name for the default import
+   */
+  getNewDefaultImportName(oldModule: string) {
+    return this.#importsMapping[oldModule]['default'].newName!
   }
 
   /**
    * Get the new module specifier for the given module ( and named import )
    */
   getNewModuleSpecifier(oldModule: string, namedImport?: string) {
-    let newPath = this.#importsMapping[oldModule][namedImport ?? '*'].newPath
-    newPath = newPath || this.getDefaultRemapping(oldModule).newPath
-    return newPath!
+    const moduleEntry = this.#importsMapping[oldModule]
+
+    let defaultEntry = moduleEntry['default']
+    let wildcardEntry = moduleEntry['*']
+
+    if (namedImport === undefined) {
+      return (defaultEntry || wildcardEntry).newPath!
+    }
+
+    let namedEntry = moduleEntry[namedImport]
+    let entry = namedEntry || wildcardEntry
+    return entry.newPath!
   }
 }

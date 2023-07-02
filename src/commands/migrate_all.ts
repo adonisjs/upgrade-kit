@@ -29,6 +29,10 @@ export class MigrateAll extends BaseCommand {
         name: 'add-type-module',
         message: 'Add type module to package.json',
       },
+      {
+        name: 'app-config',
+        message: 'Update app.ts file to use the new API',
+      },
     ] as const)
 
     await new Runner({

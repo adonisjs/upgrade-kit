@@ -18,6 +18,10 @@ export class MigrateConfigs extends BaseCommand {
         name: 'env-config',
         message: 'Update env.ts file to use the new API',
       },
+      {
+        name: 'app-config',
+        message: 'Update app.ts file to use the new API',
+      },
     ] as const)
 
     await new Runner({

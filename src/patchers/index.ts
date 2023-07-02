@@ -1,5 +1,6 @@
 import { AddJsExtensions } from './add_js_extensions/index.js'
 import { AddTypeModule } from './add_type_module/index.js'
+import { AppConfig } from './app_config/index.js'
 import { EnvConfig } from './env_config/index.js'
 import { EventsTyping } from './events_typing/index.js'
 import { MigrateAliasesToSubpath } from './migrate_aliases_to_subpath/index.js'
@@ -12,4 +13,5 @@ export const patchers = [
   EventsTyping,
   MigrateAliasesToSubpath,
   RewriteIocImports,
+  AppConfig,
 ]

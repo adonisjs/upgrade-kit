@@ -9,14 +9,13 @@
     "providers",
     "index.ts",
     "build/src",
-    "build/providers",
     "build/stubs",
+    "build/bin",
     "build/index.d.ts",
-    "build/index.d.ts.map",
     "build/index.js"
   ],
   "bin": {
-    "adomate": "build/src/cli.js"
+    "adonis-upgrade-kit": "build/bin/run.js"
   },
   "exports": {
     ".": "./build/index.js",

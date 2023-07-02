@@ -1,5 +1,5 @@
 {
-  "name": "@adonisjs/adonis6-migrator",
+  "name": "@adonisjs/upgrade-kit",
   "description": "CLI tool to migrate AdonisJS v5 projects to v6",
   "version": "0.0.0",
   "main": "build/index.js",

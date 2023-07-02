@@ -5,7 +5,7 @@ import { createRunner } from '../test_helpers/index.js'
 
 test.group('Add js extensions', () => {
   test('Rewrite directory import', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'directory/index.ts',
@@ -35,7 +35,7 @@ test.group('Add js extensions', () => {
   })
 
   test('add js extensions to imports', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'index.ts',
@@ -66,7 +66,7 @@ test.group('Add js extensions', () => {
   })
 
   test('does not add js extensions to imports that already have them', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create('index.ts', dedent`import { foo } from './foo.js'`)
 
@@ -79,7 +79,7 @@ test.group('Add js extensions', () => {
   })
 
   test('does not add js extensions to node modules', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create('index.ts', dedent`import { foo } from 'foo'`)
 
@@ -92,7 +92,7 @@ test.group('Add js extensions', () => {
   })
 
   test('does not add js extensions to subpath imports', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create('index.ts', dedent`import { foo } from '#foo/bar'`)
 

@@ -1,0 +1,12 @@
+{
+  "extends": "@adonisjs/tsconfig/tsconfig.package.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./build",
+    "resolveJsonModule": true
+  },
+  "exclude": [
+    "./test_helpers/tmp",
+    "./build"
+  ]
+}

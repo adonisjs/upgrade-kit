@@ -22,6 +22,10 @@ export class MigrateConfigs extends BaseCommand {
         name: 'app-config',
         message: 'Update app.ts file to use the new API',
       },
+      {
+        name: 'update-ace',
+        message: 'Update ace file',
+      },
     ] as const)
 
     await new Runner({

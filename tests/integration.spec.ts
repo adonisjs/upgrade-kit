@@ -46,15 +46,15 @@ test.group('Integrations', () => {
       dedent/* ts */ `
       import myService from './my-service.js'
 
-      import Env from '#start/env'
+      import env from '#start/env'
       import { HttpContext } from '@adonisjs/core/http'
-      import Router from '@adonisjs/core/services/route'
+      import router from '@adonisjs/core/services/route'
 
       import User from '#app/Models/User'
 
       export default class HomeController {
         public async index({ request }: HttpContext) {
-          const name = Env.get('APP_NAME')
+          const name = env.get('APP_NAME')
           return { name }
         }
       }

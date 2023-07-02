@@ -10,12 +10,14 @@
 Two commands are availables : 
 
 - `adonis-upgrade-kit migrate:imports` : Get rid of the `@ioc:...` imports, add extensions to the imports, replace aliases imports with subpath imports, add `type: module` to the `package.json`.
-- `adonis-update-kit migrate:configs` : Migrate some of the config files to the new format.
+- `adonis-upgrade-kit migrate:configs` : Migrate some of the config files to the new format.
+- `adonis-upgrade-kit migrate:all`: Suggests all available patchers and let you choose which ones to apply.
 
 ## Installation
 
 ```bash
 npm i -g @adonisjs/upgrade-kit
+adonis-upgrade-kit migrate:all --path ../path/to/your/project 
 ```
 
 ## Flags

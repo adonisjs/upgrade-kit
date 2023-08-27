@@ -1,10 +1,11 @@
-import { RewriteIocImportsOptions } from '../../types/index.js'
 import { ImportDeclaration, ImportSpecifier, SourceFile } from 'ts-morph'
-import { ImportMapper } from './import_mapper.js'
-import { newImportsMapping } from './default_import_mapper.js'
-import { PatcherFactory } from '../../types/index.js'
-import { BasePatcher } from '../base_patcher.js'
+
 import { Runner } from '../../runner.js'
+import { BasePatcher } from '../base_patcher.js'
+import { ImportMapper } from './import_mapper.js'
+import { PatcherFactory } from '../../types/index.js'
+import { newImportsMapping } from '../../rewrite_maps.js'
+import { RewriteIocImportsOptions } from '../../types/index.js'
 
 export function rewriteIocImports(options?: RewriteIocImportsOptions): PatcherFactory {
   return (runner) => new RewriteIocImports(runner, options)

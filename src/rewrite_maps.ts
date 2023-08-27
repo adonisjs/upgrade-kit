@@ -1,10 +1,10 @@
-import { ImportMap } from '../../types/index.js'
+import { ImportMap } from './types/index.js'
 
 /**
- * This is the default import mapping that will be used if
- * no custom mapping is provided.
+ * Map of old import paths to new import paths
+ * used by the RewriteIocImports patcher
  */
-export const newImportsMapping = {
+export const newImportsMapping: ImportMap = {
   '@adonisjs/core/build/standalone': {
     'BaseCommand': {
       newPath: '@adonisjs/core/types/ace',
@@ -85,4 +85,39 @@ export const newImportsMapping = {
       newPath: '@adonisjs/core/router',
     },
   },
-} as ImportMap
+}
+
+/**
+ * Mapping of old commands paths to new ones used by the
+ * MigrateRcFile patcher
+ */
+export const commandsRewriteMapping = {
+  '@adonisjs/core/build/commands': '@adonisjs/core/commands',
+  '@adonisjs/lucid/build/commands': '@adonisjs/lucid/commands',
+  '@adonisjs/mail/build/commands': '@adonisjs/mail/commands',
+  '@adonisjs/view/build/commands': '@adonisjs/view/commands',
+} as Record<string, string>
+
+/**
+ * Mapping of old providers paths to new ones used by the
+ * MigrateRcFile patcher
+ */
+export const providersRewriteMapping = {
+  '@adonisjs/core': [
+    '@adonisjs/core/providers/app_provider',
+    '@adonisjs/core/providers/http_provider',
+    '@adonisjs/core/providers/hash_provider',
+    {
+      file: '@adonisjs/core/providers/repl_provider',
+      environment: ['repl', 'test'],
+    },
+  ],
+  '@adonisjs/session': ['@adonisjs/session/session_provider'],
+  '@adonisjs/view': ['@adonisjs/view/views_provider'],
+  '@adonisjs/shield': ['@adonisjs/shield/shield_provider'],
+  '@adonisjs/redis': ['@adonisjs/redis/redis_provider'],
+  '@adonisjs/mail': ['@adonisjs/mail/mail_provider'],
+  '@adonisjs/ally': ['@adonisjs/ally/ally_provider'],
+  '@adonisjs/lucid': ['@adonisjs/lucid/lucid_provider'],
+  '@adonisjs/auth': ['@adonisjs/auth/auth_provider'],
+} as Record<string, (string | { file: string; environment: string[] })[]>

@@ -1,18 +1,18 @@
 import { test } from '@japa/runner'
-import { migrateAliasesToSubpath } from '../src/patchers/migrate_aliases_to_subpath/index.js'
 import dedent from 'dedent'
-import { rewriteIocImports } from '../src/patchers/rewrite_ioc_imports/index.js'
-import { addJsExtensions } from '../src/patchers/add_js_extensions/index.js'
+
 import { createRunner } from '../test_helpers/index.js'
+import { migrateRcFile } from '../src/patchers/migrate_rc_file/index.js'
+import { addJsExtensions } from '../src/patchers/add_js_extensions/index.js'
+import { rewriteIocImports } from '../src/patchers/rewrite_ioc_imports/index.js'
+import { migrateAliasesToSubpath } from '../src/patchers/migrate_aliases_to_subpath/index.js'
 
 test.group('Integrations', () => {
   test('All plugins', async ({ assert, fs }) => {
     await fs.setupProject({
       rcFile: {
-        aliases: {
-          App: 'app',
-          Contracts: 'contracts',
-        },
+        aliases: { App: 'app', Contracts: 'contracts' },
+        providers: ['@adonisjs/core'],
       },
     })
 
@@ -38,7 +38,12 @@ test.group('Integrations', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateAliasesToSubpath(), rewriteIocImports(), addJsExtensions()],
+      patchers: [
+        migrateAliasesToSubpath(),
+        rewriteIocImports(),
+        addJsExtensions(),
+        migrateRcFile(),
+      ],
     }).run()
 
     await assert.fileEquals(
@@ -60,5 +65,18 @@ test.group('Integrations', () => {
       }
     `
     )
+
+    /**
+     * Check if package.json contains subpath imports
+     */
+    const pkgJson = await fs.contentsJson('package.json')
+    assert.property(pkgJson.imports, '#app/*')
+    assert.property(pkgJson.imports, '#contracts/*')
+
+    /**
+     * Verify adonisrc.ts file
+     */
+    const adonisrc = await fs.contents('adonisrc.ts')
+    assert.snapshot(adonisrc).match()
   })
 })

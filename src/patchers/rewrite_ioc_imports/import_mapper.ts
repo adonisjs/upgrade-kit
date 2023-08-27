@@ -1,5 +1,5 @@
 import { ImportMap } from '../../types/index.js'
-import { newImportsMapping } from './default_import_mapper.js'
+import { newImportsMapping } from '../../rewrite_maps.js'
 
 export class ImportMapper {
   #importsMapping = newImportsMapping

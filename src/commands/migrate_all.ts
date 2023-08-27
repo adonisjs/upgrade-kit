@@ -37,6 +37,10 @@ export class MigrateAll extends BaseCommand {
         name: 'update-ace',
         message: 'Update ace file',
       },
+      {
+        name: 'migrate-rc-file',
+        message: 'Move from .adonisrc.json to adonisrc.ts file',
+      },
     ] as const)
 
     await new Runner({

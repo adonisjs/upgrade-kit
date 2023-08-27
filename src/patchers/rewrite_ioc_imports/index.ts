@@ -132,7 +132,7 @@ export class RewriteIocImports extends BasePatcher {
   /**
    * Process a single file
    */
-  async #processFile(file: SourceFile) {
+  #processFile(file: SourceFile) {
     const importsDeclarations = file.getImportDeclarations()
 
     for (let importDeclaration of importsDeclarations) {

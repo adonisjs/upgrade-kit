@@ -7,7 +7,8 @@ import { ImportMap } from './types/index.js'
 export const newImportsMapping: ImportMap = {
   '@adonisjs/core/build/standalone': {
     'BaseCommand': {
-      newPath: '@adonisjs/core/types/ace',
+      newName: 'BaseCommand',
+      newPath: '@adonisjs/core/ace',
     },
     '*': {
       newPath: '@adonisjs/core',

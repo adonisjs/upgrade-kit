@@ -31,9 +31,15 @@ export class AddBinFiles extends BasePatcher {
     }
 
     await Promise.all([
-      writeFile(join(rootDir, 'bin', 'console.ts'), consoleTemplate),
-      writeFile(join(rootDir, 'bin', 'test.ts'), testTemplate),
-      writeFile(join(rootDir, 'bin', 'server.ts'), serverTemplate),
+      writeFile(join(rootDir, 'bin', 'console.ts'), consoleTemplate).then(() => {
+        this.logger.info('Created bin/console.ts')
+      }),
+      writeFile(join(rootDir, 'bin', 'test.ts'), testTemplate).then(() => {
+        this.logger.info('Created bin/test.ts')
+      }),
+      writeFile(join(rootDir, 'bin', 'server.ts'), serverTemplate).then(() => {
+        this.logger.info('Created bin/server.ts')
+      }),
     ])
 
     this.exit()

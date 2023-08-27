@@ -52,6 +52,8 @@ export class UpdateAce extends BasePatcher {
     const acePath = join(rootDir, 'ace.js')
     await writeFile(acePath, aceContent)
 
+    this.logger.info('Updated ace file')
+
     this.exit()
   }
 }

@@ -53,6 +53,8 @@ export class AppConfig extends BasePatcher {
 
     httpConfig.replaceWithText(`http = defineConfig(${variableValue.getText()})`)
 
+    this.logger.info('Updated config/app.ts file')
+
     this.exit()
   }
 }

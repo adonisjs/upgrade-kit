@@ -67,6 +67,8 @@ export class EnvConfig extends BasePatcher {
      */
     this.runner.project.getSourceFile('contracts/env.ts')?.delete()
 
+    this.logger.info('Updated env.ts file')
+
     this.exit()
   }
 }

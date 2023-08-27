@@ -1,4 +1,4 @@
-import { Project } from 'ts-morph'
+import { Project, SourceFile } from 'ts-morph'
 import { Runner } from '../runner.js'
 import { PatcherContract, PatcherFactory } from '../types/index.js'
 
@@ -27,6 +27,16 @@ export abstract class BasePatcher implements PatcherContract {
     this.#startedAt = Date.now()
     // @ts-ignore
     this.logger.info(`Starting patcher ${this.colors.magenta(this.constructor['patcherName'])}`)
+  }
+
+  formatFile(file: SourceFile) {
+    file.formatText({
+      indentSize: 2,
+      convertTabsToSpaces: true,
+      trimTrailingWhitespace: true,
+    })
+
+    return file
   }
 
   exit() {

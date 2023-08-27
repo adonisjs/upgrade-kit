@@ -20,7 +20,11 @@ export class MigrateConfigs extends BaseCommand {
       },
       {
         name: 'app-config',
-        message: 'Update app.ts file to use the new API',
+        message: 'Update config/app.ts file to use the new API',
+      },
+      {
+        name: 'bodyparser-config',
+        message: 'Update config/bodyparser.ts file to use the new API',
       },
       {
         name: 'update-ace',

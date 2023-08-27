@@ -86,6 +86,11 @@ export const newImportsMapping: ImportMap = {
       newPath: '@adonisjs/core/router',
     },
   },
+  '@ioc:Adonis/Core/BodyParser': {
+    '*': {
+      newPath: '@adonisjs/bodyparser',
+    },
+  },
 }
 
 /**

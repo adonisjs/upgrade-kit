@@ -6,6 +6,7 @@ import { EventsTyping } from './events_typing/index.js'
 import { MigrateRcFile } from './migrate_rc_file/index.js'
 import { AddTypeModule } from './add_type_module/index.js'
 import { AddJsExtensions } from './add_js_extensions/index.js'
+import { BodyparserConfig } from './bodyparser_config/index.js'
 import { RewriteIocImports } from './rewrite_ioc_imports/index.js'
 import { MigrateAliasesToSubpath } from './migrate_aliases_to_subpath/index.js'
 
@@ -20,4 +21,5 @@ export const patchers = [
   UpdateAce,
   MigrateRcFile,
   AddBinFiles,
+  BodyparserConfig,
 ]

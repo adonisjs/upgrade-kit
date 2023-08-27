@@ -257,13 +257,8 @@ export class MigrateRcFile extends BasePatcher {
      * Delete old .adonisrc.json file and save the new one
      */
     await rm(join(this.#rootDir, '.adonisrc.json'))
-    source.formatText({
-      indentSize: 2,
-      convertTabsToSpaces: true,
-      trimTrailingWhitespace: true,
-    })
+    await this.formatFile(source).save()
 
-    await source.save()
     this.exit()
   }
 }

@@ -91,6 +91,11 @@ export const newImportsMapping: ImportMap = {
       newPath: '@adonisjs/bodyparser',
     },
   },
+  '@ioc:Adonis/Addons/Session': {
+    '*': {
+      newPath: '@adonisjs/session',
+    },
+  },
 }
 
 /**

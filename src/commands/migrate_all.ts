@@ -38,6 +38,10 @@ export class MigrateAll extends BaseCommand {
         message: 'Update bodyparser.ts file to use the new API',
       },
       {
+        name: 'session-config',
+        message: 'Update config/session.ts file to use the new API',
+      },
+      {
         name: 'update-ace',
         message: 'Update ace file',
       },

@@ -45,7 +45,7 @@ export class AddJsExtensions extends BasePatcher {
 
         const importedSourcePath = importNode.getModuleSpecifierSourceFile()?.getFilePath()
 
-        if (importedSourcePath?.endsWith('index.ts') && !moduleSpecifier.endsWith('index.js')) {
+        if (importedSourcePath?.endsWith('index.ts') && !moduleSpecifier.endsWith('index')) {
           this.#changes.push({ importNode, newModuleSpecifier: `${moduleSpecifier}/index.js` })
           continue
         }

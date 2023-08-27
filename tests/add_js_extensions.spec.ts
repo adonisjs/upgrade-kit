@@ -103,4 +103,15 @@ test.group('Add js extensions', () => {
 
     await assert.fileEquals('index.ts', dedent`import { foo } from '#foo/bar'`)
   })
+
+  test('handle ./index imports', async ({ assert, fs }) => {
+    await fs.setupProject({})
+
+    await fs.create('index.ts', 'export const foo = "bar"')
+    await fs.create('foo.ts', `import { foo } from './index'`)
+
+    await createRunner({ projectPath: fs.basePath, patchers: [addJsExtensions()] }).run()
+
+    await assert.fileEquals('foo.ts', `import { foo } from './index.js'`)
+  })
 })

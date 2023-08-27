@@ -42,6 +42,10 @@ export class MigrateAll extends BaseCommand {
         message: 'Update config/session.ts file to use the new API',
       },
       {
+        name: 'static-config',
+        message: 'Update config/static.ts file to use the new API',
+      },
+      {
         name: 'update-ace',
         message: 'Update ace file',
       },

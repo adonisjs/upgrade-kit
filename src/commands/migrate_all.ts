@@ -41,6 +41,10 @@ export class MigrateAll extends BaseCommand {
         name: 'migrate-rc-file',
         message: 'Move from .adonisrc.json to adonisrc.ts file',
       },
+      {
+        name: 'add-bin-files',
+        message: 'Add bin files needed to run the server/test/console',
+      },
     ] as const)
 
     await new Runner({

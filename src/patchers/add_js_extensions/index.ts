@@ -1,7 +1,8 @@
-import { ImportDeclaration } from 'ts-morph'
-import { PatcherFactory } from '../../types/index.js'
-import { BasePatcher } from '../base_patcher.js'
 import { extname } from 'node:path'
+import { ImportDeclaration } from 'ts-morph'
+
+import { BasePatcher } from '../base_patcher.js'
+import { PatcherFactory } from '../../types/index.js'
 
 export function addJsExtensions(): PatcherFactory {
   return (runner) => new AddJsExtensions(runner)

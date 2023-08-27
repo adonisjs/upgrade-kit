@@ -29,7 +29,8 @@ await aceShell(new URL('./', import.meta.url)).handle(process.argv.splice(2))
 `
 
 /**
- * Add type: module to package.json
+ * Update the ace file
+ * Also delete the olds commands/index.ts file
  */
 export class UpdateAce extends BasePatcher {
   static patcherName = 'update-ace'
@@ -38,10 +39,12 @@ export class UpdateAce extends BasePatcher {
     super.invoke()
 
     const rootDir = this.runner.project.getRootDirectories()[0].getPath()
+
     /**
-     * Remove old file
+     * Remove old files
      */
     await rm(join(rootDir, 'ace'))
+    await rm(join(rootDir, 'commands', 'index.ts'))
 
     /**
      * Insert new one

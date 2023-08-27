@@ -1,58 +1,30 @@
-import { SyntaxKind } from 'ts-morph'
 import { PatcherFactory } from '../../types/index.js'
-import { BasePatcher } from '../base_patcher.js'
-import { join } from 'node:path'
+import { ConfigUpdaterPatcher } from '../config_updater_patcher.js'
 
 export function appConfig(): PatcherFactory {
   return (runner) => new AppConfig(runner)
 }
 
 /**
- * Rewrite the env.ts file to use the new API
+ * Rewrite the app.ts file to use the new API
  */
-export class AppConfig extends BasePatcher {
+export class AppConfig extends ConfigUpdaterPatcher {
   static patcherName = 'app-config'
 
-  invoke() {
+  async invoke() {
     super.invoke()
 
-    /**
-     * Get config/app.ts file
-     */
-    const configAppPath = join(
-      this.runner.project.getRootDirectories()[0].getPath(),
-      'config/app.ts'
-    )
-    const file = this.runner.project.getSourceFile(configAppPath)
-    if (!file) {
-      this.logger.warning('config/app.ts file not found. Skipping patching')
-      return
-    }
+    const file = this.getConfigFile('config/app.ts')
+    if (!file) return
 
-    /**
-     * Delete ServerConfig import since we gonna use defineConfig
-     */
-    const serverConfigImport = file.getImportDeclaration('@ioc:Adonis/Core/Server')
-    if (serverConfigImport) {
-      serverConfigImport.remove()
-    }
-
-    /**
-     * Add defineConfig import
-     */
-    file.addImportDeclaration({
-      moduleSpecifier: '@adonisjs/core/http',
-      namedImports: ['defineConfig'],
+    this.replaceOldLiteralConfigWithDefineConfig({
+      file,
+      oldTypeImport: '@ioc:Adonis/Core/Server',
+      defineConfigImport: '@adonisjs/core/http',
+      variableName: 'http',
     })
 
-    /**
-     * Wrap the content of export const http inside defineConfig
-     */
-    const httpConfig = file.getVariableDeclarationOrThrow('http')
-    const variableValue = httpConfig.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression)
-
-    httpConfig.replaceWithText(`http = defineConfig(${variableValue.getText()})`)
-
+    await this.formatFile(file).save()
     this.logger.info('Updated config/app.ts file')
 
     this.exit()

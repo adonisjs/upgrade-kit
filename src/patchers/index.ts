@@ -1,5 +1,6 @@
 import { AppConfig } from './app_config/index.js'
 import { EnvConfig } from './env_config/index.js'
+import { CorsConfig } from './cors_config/index.js'
 import { UpdateAce } from './update_ace/update_ace.js'
 import { AddBinFiles } from './add_bin_files/index.js'
 import { StaticConfig } from './static_config/index.js'
@@ -26,4 +27,5 @@ export const patchers = [
   BodyparserConfig,
   SessionConfig,
   StaticConfig,
+  CorsConfig,
 ]

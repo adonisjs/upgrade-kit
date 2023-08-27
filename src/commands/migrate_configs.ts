@@ -35,6 +35,10 @@ export class MigrateConfigs extends BaseCommand {
         message: 'Update config/static.ts file to use the new API',
       },
       {
+        name: 'cors-config',
+        message: 'Update config/cors.ts file to use the new API',
+      },
+      {
         name: 'update-ace',
         message: 'Update ace file',
       },

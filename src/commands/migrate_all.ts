@@ -63,6 +63,20 @@ export class MigrateAll extends BaseCommand {
       },
     ] as const)
 
+    // find better solution. This is a hack to make sure config patchers are
+    // always executed first
+    selectedPatchers.sort((a, b) => {
+      if (a.includes('-config') && !b.includes('-config')) {
+        return -1
+      }
+
+      if (!a.includes('-config') && b.includes('-config')) {
+        return 1
+      }
+
+      return 0
+    })
+
     await new Runner({
       patchers: this.generatePatchersFromPrompt(selectedPatchers),
       projectPath: this.projectPath,

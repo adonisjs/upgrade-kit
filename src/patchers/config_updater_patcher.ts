@@ -23,9 +23,9 @@ export class ConfigUpdaterPatcher extends BasePatcher {
     /**
      * Remove old config typing import statement
      */
-    const serverConfigImport = options.file.getImportDeclaration(options.oldTypeImport)
-    if (serverConfigImport) {
-      serverConfigImport.remove()
+    const oldConfigTypeImport = options.file.getImportDeclaration(options.oldTypeImport)
+    if (oldConfigTypeImport) {
+      oldConfigTypeImport.remove()
     }
 
     /**

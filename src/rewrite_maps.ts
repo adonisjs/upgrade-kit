@@ -33,6 +33,10 @@ export const newImportsMapping: ImportMap = {
     },
   },
   '@ioc:Adonis/Core/Application': {
+    'default': {
+      newName: 'app',
+      newPath: '@adonisjs/core/services/app',
+    },
     '*': {
       newPath: '@adonisjs/core/application',
     },

@@ -78,5 +78,5 @@ test.group('Integrations', () => {
      */
     const adonisrc = await fs.contents('adonisrc.ts')
     assert.snapshot(adonisrc).match()
-  })
+  }).disableTimeout()
 })

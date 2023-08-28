@@ -57,13 +57,16 @@ export class MigrateAliasesToSubpath extends BasePatcher {
   #convertAliasesToTsPaths() {
     const aliases = this.runner.rcFile.getAliases()
 
-    return Object.entries(aliases).reduce((acc, [alias, path]) => {
-      const tsPathKey = `#${alias.toLowerCase()}/*`
-      const tsPathValue = ['./' + path + '/*']
+    return Object.entries(aliases).reduce(
+      (acc, [alias, path]) => {
+        const tsPathKey = `#${alias.toLowerCase()}/*`
+        const tsPathValue = ['./' + path + '/*']
 
-      acc[tsPathKey] = tsPathValue
-      return acc
-    }, {} as Record<string, string[]>)
+        acc[tsPathKey] = tsPathValue
+        return acc
+      },
+      {} as Record<string, string[]>
+    )
   }
 
   /**
@@ -72,14 +75,17 @@ export class MigrateAliasesToSubpath extends BasePatcher {
   #convertAliasesToSubpaths() {
     const tsPaths = this.#convertAliasesToTsPaths()
 
-    return Object.entries(tsPaths).reduce((acc, [tsPathKey, tsPathValue]) => {
-      const subpathKey = tsPathKey
-      const subpathValue = `${tsPathValue}.js`
+    return Object.entries(tsPaths).reduce(
+      (acc, [tsPathKey, tsPathValue]) => {
+        const subpathKey = tsPathKey
+        const subpathValue = `${tsPathValue}.js`
 
-      acc[subpathKey] = subpathValue
+        acc[subpathKey] = subpathValue
 
-      return acc
-    }, {} as Record<string, string>)
+        return acc
+      },
+      {} as Record<string, string>
+    )
   }
 
   /**

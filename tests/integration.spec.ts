@@ -2,7 +2,7 @@ import { test } from '@japa/runner'
 import dedent from 'dedent'
 
 import { createRunner } from '../test_helpers/index.js'
-import { migrateRcFile } from '../src/patchers/migrate_rc_file/index.js'
+import { upgradeRcFile } from '../src/patchers/upgrade_rc_file/index.js'
 import { upgradeAliases } from '../src/patchers/upgrade_aliases/index.js'
 import { migrateIocImports } from '../src/patchers/migrate_ioc_imports/index.js'
 import { fixRelativeImports } from '../src/patchers/fix_relative_imports/index.js'
@@ -38,7 +38,7 @@ test.group('Integrations', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [upgradeAliases(), migrateIocImports(), fixRelativeImports(), migrateRcFile()],
+      patchers: [upgradeAliases(), migrateIocImports(), fixRelativeImports(), upgradeRcFile()],
     }).run()
 
     await assert.fileEquals(

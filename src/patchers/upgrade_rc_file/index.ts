@@ -7,8 +7,8 @@ import { BasePatcher } from '../base_patcher.js'
 import { PatcherFactory } from '../../types/index.js'
 import { commandsRewriteMapping, providersRewriteMapping } from '../../rewrite_maps.js'
 
-export function migrateRcFile(): PatcherFactory {
-  return (runner) => new MigrateRcFile(runner)
+export function upgradeRcFile(): PatcherFactory {
+  return (runner) => new UpgradeRcFile(runner)
 }
 
 /**
@@ -17,7 +17,7 @@ export function migrateRcFile(): PatcherFactory {
  * Note that it will also modify some of the commands and providers
  * paths since some of them has been moved with v6.
  */
-export class MigrateRcFile extends BasePatcher {
+export class UpgradeRcFile extends BasePatcher {
   static patcherName = 'migrate-rc-file'
   #rootDir!: string
   #jsonRcFileContents!: Record<string, any>

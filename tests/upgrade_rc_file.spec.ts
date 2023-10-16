@@ -1,8 +1,8 @@
 import { test } from '@japa/runner'
-import { migrateRcFile } from '../src/patchers/migrate_rc_file/index.js'
+import { upgradeRcFile } from '../src/patchers/upgrade_rc_file/index.js'
 import { createRunner } from '../test_helpers/index.js'
 
-test.group('Migrate rc file', () => {
+test.group('Upgrade rc file', () => {
   test('migrate commands', async ({ assert, fs }) => {
     await fs.setupProject({
       rcFile: {
@@ -12,7 +12,7 @@ test.group('Migrate rc file', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateRcFile()],
+      patchers: [upgradeRcFile()],
     }).run()
 
     const rcFile = await fs.contents('adonisrc.ts')
@@ -28,7 +28,7 @@ test.group('Migrate rc file', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateRcFile()],
+      patchers: [upgradeRcFile()],
     }).run()
 
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
@@ -43,7 +43,7 @@ test.group('Migrate rc file', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateRcFile()],
+      patchers: [upgradeRcFile()],
     }).run()
 
     await assert.fileContains(
@@ -64,7 +64,7 @@ test.group('Migrate rc file', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateRcFile()],
+      patchers: [upgradeRcFile()],
     }).run()
 
     await assert.fileNotExists('.adonisrc.json')
@@ -77,7 +77,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     const file = await fs.contents('adonisrc.ts')
     assert.snapshot(file).match()
@@ -94,7 +94,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     const file = await fs.contents('adonisrc.ts')
     assert.snapshot(file).match()
@@ -107,7 +107,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })
@@ -119,7 +119,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })
@@ -131,7 +131,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })
@@ -146,7 +146,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })
@@ -163,7 +163,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })
@@ -183,7 +183,7 @@ test.group('Migrate rc file', () => {
       },
     })
 
-    await createRunner({ projectPath: fs.basePath, patchers: [migrateRcFile()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()
 
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })

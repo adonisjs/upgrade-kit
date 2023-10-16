@@ -1,5 +1,6 @@
 import { Kernel, ListLoader } from '@adonisjs/ace'
 
+import { UpgradeRcFile } from './src/commands/upgrade_rc_file.js'
 import { UpgradeAliases } from './src/commands/upgrade_aliases.js'
 import { UpgradePackages } from './src/commands/upgrade_packages.js'
 import { UpdateEnvConfig } from './src/commands/update_env_config.js'
@@ -17,5 +18,6 @@ export const kernel = Kernel.create().addLoader(
     FixRelativeImports,
     UpdateEnvConfig,
     UpgradeEntrypoints,
+    UpgradeRcFile,
   ])
 )

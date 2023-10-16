@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { mkdir, writeFile } from 'node:fs/promises'
+import { mkdir, writeFile, rm } from 'node:fs/promises'
 
 import { BasePatcher } from '../base_patcher.js'
 import { testTemplate } from './test_template.js'
@@ -7,9 +7,10 @@ import { serverTemplate } from './server_template.js'
 import { PatcherFactory } from '../../types/index.js'
 import { consoleTemplate } from './console_template.js'
 import { existsSync } from 'node:fs'
+import { aceTemplate } from './ace_template.js'
 
-export function addBinFiles(): PatcherFactory {
-  return (runner) => new AddBinFiles(runner)
+export function upgradeEntrypoints(): PatcherFactory {
+  return (runner) => new UpgradeEntrypoints(runner)
 }
 
 /**
@@ -17,9 +18,17 @@ export function addBinFiles(): PatcherFactory {
  * - bin/console.ts
  * - bin/test.ts
  * - bin/server.ts
+ *
+ * And also the ace.js root file
  */
-export class AddBinFiles extends BasePatcher {
+export class UpgradeEntrypoints extends BasePatcher {
   static patcherName = 'add-bin-files'
+
+  async #rmIfExists(path: string) {
+    if (existsSync(path)) {
+      await rm(path)
+    }
+  }
 
   async invoke() {
     super.invoke()
@@ -31,6 +40,9 @@ export class AddBinFiles extends BasePatcher {
     }
 
     await Promise.all([
+      /**
+       * Bin Files
+       */
       writeFile(join(rootDir, 'bin', 'console.ts'), consoleTemplate).then(() => {
         this.logger.info('Created bin/console.ts')
       }),
@@ -39,6 +51,15 @@ export class AddBinFiles extends BasePatcher {
       }),
       writeFile(join(rootDir, 'bin', 'server.ts'), serverTemplate).then(() => {
         this.logger.info('Created bin/server.ts')
+      }),
+
+      /**
+       * Ace file and also remove the old commands/index file
+       */
+      this.#rmIfExists(join(rootDir, 'ace')),
+      this.#rmIfExists(join(rootDir, 'commands', 'index.ts')),
+      writeFile(join(rootDir, 'ace.js'), aceTemplate).then(() => {
+        this.logger.info('Created ace.js')
       }),
     ])
 

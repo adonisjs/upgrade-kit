@@ -2,8 +2,8 @@ import { PatcherFactory } from '../../types/index.js'
 import { lowercaseFirstLetter } from '../../utils.js'
 import { BasePatcher } from '../base_patcher.js'
 
-export function migrateAliasesToSubpath(): PatcherFactory {
-  return (runner) => new MigrateAliasesToSubpath(runner)
+export function upgradeAliases(): PatcherFactory {
+  return (runner) => new UpgradeAliases(runner)
 }
 
 /**
@@ -48,8 +48,8 @@ const DEFAULT_SUBPATHS = {
  * 3. Remove aliases from .adonisrc.json file
  * 4. Update the imports inside the source files
  */
-export class MigrateAliasesToSubpath extends BasePatcher {
-  static patcherName = 'migrate-aliases-to-subpath'
+export class UpgradeAliases extends BasePatcher {
+  static patcherName = 'upgrade-aliases'
 
   /**
    * Converts aliases to ts paths entries

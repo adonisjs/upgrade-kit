@@ -7,18 +7,18 @@ import { StaticConfig } from './static_config/index.js'
 import { EventsTyping } from './events_typing/index.js'
 import { SessionConfig } from './session_config/index.js'
 import { MigrateRcFile } from './migrate_rc_file/index.js'
-import { AddTypeModule } from './add_type_module/index.js'
+import { UpdateModuleSystem } from './update_module_system/index.js'
 import { AddJsExtensions } from './add_js_extensions/index.js'
 import { BodyparserConfig } from './bodyparser_config/index.js'
 import { RewriteIocImports } from './rewrite_ioc_imports/index.js'
-import { MigrateAliasesToSubpath } from './migrate_aliases_to_subpath/index.js'
+import { UpgradeAliases } from './upgrade_aliases/index.js'
 
 export const patchers = [
   AddJsExtensions,
-  AddTypeModule,
+  UpdateModuleSystem,
   EnvConfig,
   EventsTyping,
-  MigrateAliasesToSubpath,
+  UpgradeAliases,
   RewriteIocImports,
   AppConfig,
   UpdateAce,

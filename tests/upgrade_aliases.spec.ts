@@ -1,9 +1,9 @@
 import { test } from '@japa/runner'
-import { migrateAliasesToSubpath } from '../src/patchers/migrate_aliases_to_subpath/index.js'
+import { upgradeAliases } from '../src/patchers/upgrade_aliases/index.js'
 import dedent from 'dedent'
 import { createRunner } from '../test_helpers/index.js'
 
-test.group('Replace imports with subpath', () => {
+test.group('Upgrade aliases', () => {
   test('Remove aliases from .rcfile', async ({ assert, fs }) => {
     await fs.setupProject({
       rcFile: {
@@ -16,7 +16,7 @@ test.group('Replace imports with subpath', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateAliasesToSubpath()],
+      patchers: [upgradeAliases()],
     }).run()
 
     await assert.fileEquals('.adonisrc.json', '{}')
@@ -45,7 +45,7 @@ test.group('Replace imports with subpath', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateAliasesToSubpath()],
+      patchers: [upgradeAliases()],
     }).run()
 
     const tsConfig = await fs.contentsJson('tsconfig.json')
@@ -75,7 +75,7 @@ test.group('Replace imports with subpath', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [migrateAliasesToSubpath()],
+      patchers: [upgradeAliases()],
     }).run()
 
     await assert.fileEquals(

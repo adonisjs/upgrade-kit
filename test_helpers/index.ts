@@ -15,8 +15,8 @@ export function createRunner(options: RunnerOptions) {
  */
 declare module '@japa/file-system' {
   interface FileSystem {
-    addTsConfig(): Promise<void>
-    addRcFile(aliases?: Record<string, string>): Promise<void>
+    addTsConfig(data?: Record<string, any>): Promise<void>
+    addRcFile(data?: Record<string, any>): Promise<void>
     addPackageJsonFile(data?: Record<string, any>): Promise<void>
 
     setupProject(options: {
@@ -51,7 +51,7 @@ FileSystem.macro(
     }
   ) {
     await Promise.all([
-      await this.addTsConfig(),
+      await this.addTsConfig(options.tsconfig),
       await this.addRcFile(options.rcFile),
       await this.addPackageJsonFile(options.pkgJson),
     ])

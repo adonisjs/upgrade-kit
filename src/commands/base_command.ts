@@ -1,22 +1,11 @@
-import { BaseCommand as AceBaseCommand, flags } from '@adonisjs/ace'
-import { resolve } from 'node:path'
 import { cwd } from 'node:process'
-import { patchers } from '../patchers/index.js'
-import { Runner } from '../runner.js'
+import { resolve } from 'node:path'
+import { BaseCommand as AceBaseCommand, flags } from '@adonisjs/ace'
 
 export class BaseCommand extends AceBaseCommand {
   @flags.string({ name: 'path', description: 'path to project' })
   declare path: string
-
   protected projectPath!: string
-
-  protected generatePatchersFromPrompt(selectedPatchers: string[]) {
-    const patchersClasses = selectedPatchers.map((patcher) =>
-      patchers.find((p) => p.patcherName === patcher)
-    )
-
-    return patchersClasses.map((patcher) => (r: Runner) => new patcher!(r))
-  }
 
   protected displayHeading() {
     const title = Buffer.from(

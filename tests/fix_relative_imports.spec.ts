@@ -1,9 +1,10 @@
-import { test } from '@japa/runner'
 import dedent from 'dedent'
-import { addJsExtensions } from '../src/patchers/add_js_extensions/index.js'
-import { createRunner } from '../test_helpers/index.js'
+import { test } from '@japa/runner'
 
-test.group('Add js extensions', () => {
+import { createRunner } from '../test_helpers/index.js'
+import { fixRelativeImports } from '../src/patchers/fix_relative_imports/index.js'
+
+test.group('Fix relative imports', () => {
   test('Rewrite directory import', async ({ assert, fs }) => {
     await fs.setupProject({})
 
@@ -23,7 +24,7 @@ test.group('Add js extensions', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [addJsExtensions()],
+      patchers: [fixRelativeImports()],
     }).run()
 
     await assert.fileEquals(
@@ -50,7 +51,7 @@ test.group('Add js extensions', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [addJsExtensions()],
+      patchers: [fixRelativeImports()],
     }).run()
 
     await assert.fileEquals(
@@ -72,7 +73,7 @@ test.group('Add js extensions', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [addJsExtensions()],
+      patchers: [fixRelativeImports()],
     }).run()
 
     await assert.fileEquals('index.ts', dedent`import { foo } from './foo.js'`)
@@ -85,7 +86,7 @@ test.group('Add js extensions', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [addJsExtensions()],
+      patchers: [fixRelativeImports()],
     }).run()
 
     await assert.fileEquals('index.ts', dedent`import { foo } from 'foo'`)
@@ -98,7 +99,7 @@ test.group('Add js extensions', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [addJsExtensions()],
+      patchers: [fixRelativeImports()],
     }).run()
 
     await assert.fileEquals('index.ts', dedent`import { foo } from '#foo/bar'`)
@@ -110,7 +111,7 @@ test.group('Add js extensions', () => {
     await fs.create('index.ts', 'export const foo = "bar"')
     await fs.create('foo.ts', `import { foo } from './index'`)
 
-    await createRunner({ projectPath: fs.basePath, patchers: [addJsExtensions()] }).run()
+    await createRunner({ projectPath: fs.basePath, patchers: [fixRelativeImports()] }).run()
 
     await assert.fileEquals('foo.ts', `import { foo } from './index.js'`)
   })

@@ -4,8 +4,8 @@ import { ImportDeclaration } from 'ts-morph'
 import { BasePatcher } from '../base_patcher.js'
 import { PatcherFactory } from '../../types/index.js'
 
-export function addJsExtensions(): PatcherFactory {
-  return (runner) => new AddJsExtensions(runner)
+export function fixRelativeImports(): PatcherFactory {
+  return (runner) => new FixRelativeImports(runner)
 }
 
 /**
@@ -15,7 +15,7 @@ export function addJsExtensions(): PatcherFactory {
  * We also need to add `index.js` to the imports that are directories since
  * it's not possible with ESM
  */
-export class AddJsExtensions extends BasePatcher {
+export class FixRelativeImports extends BasePatcher {
   static patcherName = 'add-js-extensions'
 
   #changes: {

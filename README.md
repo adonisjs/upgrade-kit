@@ -7,17 +7,13 @@
 
 `adonis-upgrade-kit` is a CLI tool to upgrade Adonis.js v5 projects to v6. It probably won't cover all the work and you'll still have some manual actions to do, but at least a lot of the boring work will be done by this tool.
 
-Two commands are availables : 
-
-- `adonis-upgrade-kit migrate:imports` : Get rid of the `@ioc:...` imports, add extensions to the imports, replace aliases imports with subpath imports, add `type: module` to the `package.json`.
-- `adonis-upgrade-kit migrate:configs` : Migrate some of the config files to the new format.
-- `adonis-upgrade-kit migrate:all`: Suggests all available patchers and let you choose which ones to apply.
+Type `adonis-upgrade-kit` to see all the available commands. Also check the [Adonis.js v6 upgrade guide](https://github.com/adonisjs/v5_to_v6_upgrade_guide/tree/main) for more informations about the different commands and the manual actions to do.
 
 ## Installation
 
 ```bash
 npm i -g @adonisjs/upgrade-kit
-adonis-upgrade-kit migrate:all --path ../path/to/your/project 
+adonis-upgrade-kit upgrade-packages --path ../path/to/your/project 
 ```
 
 ## Flags

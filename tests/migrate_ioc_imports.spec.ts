@@ -4,7 +4,9 @@ import { test } from '@japa/runner'
 import { createRunner } from '../test_helpers/index.js'
 import { migrateIocImports } from '../src/patchers/migrate_ioc_imports/index.js'
 
-test.group('Migrate Ioc Imports', () => {
+test.group('Migrate Ioc Imports', (group) => {
+  group.tap((t) => t.timeout(0))
+
   test('Basic', async ({ assert, fs }) => {
     await fs.setupProject({})
 

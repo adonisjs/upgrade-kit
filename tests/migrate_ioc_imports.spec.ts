@@ -2,7 +2,7 @@ import dedent from 'dedent'
 import { test } from '@japa/runner'
 
 import { createRunner } from '../test_helpers/index.js'
-import { migrateIocImports } from '../src/patchers/rewrite_ioc_imports/index.js'
+import { migrateIocImports } from '../src/patchers/migrate_ioc_imports/index.js'
 
 test.group('Migrate Ioc Imports', () => {
   test('Basic', async ({ assert, fs }) => {

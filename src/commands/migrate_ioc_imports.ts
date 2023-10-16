@@ -1,6 +1,6 @@
 import { Runner } from '../runner.js'
 import { BaseCommand } from './base_command.js'
-import { migrateIocImports } from '../patchers/rewrite_ioc_imports/index.js'
+import { migrateIocImports } from '../patchers/migrate_ioc_imports/index.js'
 
 export class MigrateIocImports extends BaseCommand {
   static commandName = 'migrate-ioc-imports'

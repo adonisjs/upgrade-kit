@@ -10,7 +10,7 @@ import { MigrateRcFile } from './migrate_rc_file/index.js'
 import { UpdateModuleSystem } from './update_module_system/index.js'
 import { AddJsExtensions } from './add_js_extensions/index.js'
 import { BodyparserConfig } from './bodyparser_config/index.js'
-import { MigrateIocImports } from './rewrite_ioc_imports/index.js'
+import { MigrateIocImports } from './migrate_ioc_imports/index.js'
 import { UpgradeAliases } from './upgrade_aliases/index.js'
 
 export const patchers = [

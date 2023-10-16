@@ -5,7 +5,7 @@ import { appConfig } from '../src/patchers/app_config/index.js'
 
 test.group('App config', () => {
   test('Update app http config', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'config/app.ts',

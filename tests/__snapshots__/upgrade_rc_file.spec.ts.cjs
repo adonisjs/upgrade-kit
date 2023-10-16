@@ -1,4 +1,4 @@
-exports[`Migrate rc file > migrate commands 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > migrate commands 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   /*
@@ -14,7 +14,12 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > migrate preloads files 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > should remove ./commands since it is not needed anymore 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+
+export default defineConfig({});
+"`
+
+exports[`Upgrade rc file > migrate preloads files 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   /*
@@ -32,12 +37,7 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > should remove ./commands since it is not needed anymore 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
-
-export default defineConfig({});
-"`
-
-exports[`Migrate rc file > keep environments while migrating preload files 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > keep environments while migrating preload files 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   /*
@@ -62,7 +62,7 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > migrate providers 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > migrate providers 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   /*
@@ -81,7 +81,7 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > replace adonisjs/core with new providers 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > replace adonisjs/core with new providers 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   /*
@@ -105,7 +105,7 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > replace old providers with new one 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > replace old providers with new one 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   /*
@@ -125,7 +125,7 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > migrate directories 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > migrate directories 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   directories: {
@@ -135,7 +135,7 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > migrate meta files 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > migrate meta files 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   metaFiles: [
@@ -147,7 +147,7 @@ export default defineConfig({
 });
 "`
 
-exports[`Migrate rc file > migrate tests suites 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+exports[`Upgrade rc file > migrate tests suites 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
   /*

@@ -6,7 +6,7 @@ import { staticConfig } from '../src/patchers/static_config/index.js'
 
 test.group('Static config', () => {
   test('Update static config', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'config/static.ts',

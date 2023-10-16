@@ -6,7 +6,7 @@ import { migrateIocImports } from '../src/patchers/migrate_ioc_imports/index.js'
 
 test.group('Migrate Ioc Imports', () => {
   test('Basic', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'index.ts',
@@ -41,7 +41,7 @@ test.group('Migrate Ioc Imports', () => {
   })
 
   test('multiple named imports', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'index.ts',
@@ -84,7 +84,7 @@ test.group('Migrate Ioc Imports', () => {
   })
 
   test('multiple named imports and one move out', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'index.ts',
@@ -129,7 +129,7 @@ test.group('Migrate Ioc Imports', () => {
   })
 
   test('rewrite default import', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'index.ts',

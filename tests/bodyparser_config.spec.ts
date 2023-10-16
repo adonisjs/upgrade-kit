@@ -6,7 +6,7 @@ import { bodyparserConfig } from '../src/patchers/bodyparser_config/index.js'
 
 test.group('Bodyparser config', () => {
   test('Update bodyparser config', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'config/bodyparser.ts',

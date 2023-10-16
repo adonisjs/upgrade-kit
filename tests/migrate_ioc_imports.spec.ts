@@ -1,9 +1,10 @@
-import { test } from '@japa/runner'
 import dedent from 'dedent'
-import { rewriteIocImports } from '../src/patchers/rewrite_ioc_imports/index.js'
-import { createRunner } from '../test_helpers/index.js'
+import { test } from '@japa/runner'
 
-test.group('Rewrite Ioc Imports', () => {
+import { createRunner } from '../test_helpers/index.js'
+import { migrateIocImports } from '../src/patchers/rewrite_ioc_imports/index.js'
+
+test.group('Migrate Ioc Imports', () => {
   test('Basic', async ({ assert, fs }) => {
     await fs.addTsConfig()
 
@@ -22,7 +23,7 @@ test.group('Rewrite Ioc Imports', () => {
 
     await createRunner({
       projectPath: fs.basePath,
-      patchers: [rewriteIocImports()],
+      patchers: [migrateIocImports()],
     }).run()
 
     await assert.fileEquals(
@@ -54,7 +55,7 @@ test.group('Rewrite Ioc Imports', () => {
     await createRunner({
       projectPath: fs.basePath,
       patchers: [
-        rewriteIocImports({
+        migrateIocImports({
           importMap: {
             '@ioc:Adonis/Core/HttpContext': {
               '*': {
@@ -97,7 +98,7 @@ test.group('Rewrite Ioc Imports', () => {
     await createRunner({
       projectPath: fs.basePath,
       patchers: [
-        rewriteIocImports({
+        migrateIocImports({
           importMap: {
             '@ioc:Adonis/Core/HttpContext': {
               '*': {
@@ -143,7 +144,7 @@ test.group('Rewrite Ioc Imports', () => {
     await createRunner({
       projectPath: fs.basePath,
       patchers: [
-        rewriteIocImports({
+        migrateIocImports({
           importMap: {
             '@ioc:Adonis/Core/Event': {
               'default': {

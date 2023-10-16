@@ -7,11 +7,11 @@ import { PatcherFactory } from '../../types/index.js'
 import { newImportsMapping } from '../../rewrite_maps.js'
 import { RewriteIocImportsOptions } from '../../types/index.js'
 
-export function rewriteIocImports(options?: RewriteIocImportsOptions): PatcherFactory {
-  return (runner) => new RewriteIocImports(runner, options)
+export function migrateIocImports(options?: RewriteIocImportsOptions): PatcherFactory {
+  return (runner) => new MigrateIocImports(runner, options)
 }
 
-export class RewriteIocImports extends BasePatcher {
+export class MigrateIocImports extends BasePatcher {
   static patcherName = 'rewrite-ioc-imports'
 
   #options: RewriteIocImportsOptions

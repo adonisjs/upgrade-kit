@@ -133,6 +133,6 @@ export const providersRewriteMapping = {
   '@adonisjs/redis': ['@adonisjs/redis/redis_provider'],
   '@adonisjs/mail': ['@adonisjs/mail/mail_provider'],
   '@adonisjs/ally': ['@adonisjs/ally/ally_provider'],
-  '@adonisjs/lucid': ['@adonisjs/lucid/lucid_provider'],
+  '@adonisjs/lucid': ['@adonisjs/lucid/database_provider'],
   '@adonisjs/auth': ['@adonisjs/auth/auth_provider'],
 } as Record<string, (string | { file: string; environment: string[] })[]>

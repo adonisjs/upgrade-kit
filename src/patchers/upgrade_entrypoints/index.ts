@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { mkdir, writeFile, rm } from 'node:fs/promises'
+import { mkdir, writeFile } from 'node:fs/promises'
 
 import { BasePatcher } from '../base_patcher.js'
 import { testTemplate } from './test_template.js'
@@ -8,6 +8,7 @@ import { PatcherFactory } from '../../types/index.js'
 import { consoleTemplate } from './console_template.js'
 import { existsSync } from 'node:fs'
 import { aceTemplate } from './ace_template.js'
+import { rmIfExists } from '../../utils.js'
 
 export function upgradeEntrypoints(): PatcherFactory {
   return (runner) => new UpgradeEntrypoints(runner)
@@ -23,12 +24,6 @@ export function upgradeEntrypoints(): PatcherFactory {
  */
 export class UpgradeEntrypoints extends BasePatcher {
   static patcherName = 'add-bin-files'
-
-  async #rmIfExists(path: string) {
-    if (existsSync(path)) {
-      await rm(path)
-    }
-  }
 
   async invoke() {
     super.invoke()
@@ -56,8 +51,8 @@ export class UpgradeEntrypoints extends BasePatcher {
       /**
        * Ace file and also remove the old commands/index file
        */
-      this.#rmIfExists(join(rootDir, 'ace')),
-      this.#rmIfExists(join(rootDir, 'commands', 'index.ts')),
+      rmIfExists(join(rootDir, 'ace')),
+      rmIfExists(join(rootDir, 'commands', 'index.ts')),
       writeFile(join(rootDir, 'ace.js'), aceTemplate).then(() => {
         this.logger.info('Created ace.js')
       }),

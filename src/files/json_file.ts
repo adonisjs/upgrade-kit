@@ -8,6 +8,11 @@ export class JsonFile {
     this.content = JSON.parse(readFileSync(filePath, 'utf-8'))
   }
 
+  reload() {
+    this.content = JSON.parse(readFileSync(this.filePath, 'utf-8'))
+    return this
+  }
+
   get() {
     return this.content
   }

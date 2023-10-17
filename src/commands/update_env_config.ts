@@ -2,9 +2,9 @@ import { Runner } from '../runner.js'
 import { BaseCommand } from './base_command.js'
 import { envConfig } from '../patchers/env_config/index.js'
 
-export class UpdateEnvConfig extends BaseCommand {
-  static commandName = 'update-env-config'
-  static description = `updates the env.ts file to be compatible with the new API.`
+export class UpgradeEnvConfig extends BaseCommand {
+  static commandName = 'upgrade-env-config'
+  static description = `Update the env.ts file to be compatible with the new API.`
 
   async run() {
     this.displayHeading()

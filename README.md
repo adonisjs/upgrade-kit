@@ -22,6 +22,38 @@ adonis-upgrade-kit upgrade-packages --path ../path/to/your/project
 |---|---|
 | `-p, --path` | Path to the project to upgrade. Defaults to the current directory. |
 
+## Order of commands
+
+The commands should ideally be run in the following order:
+
+```sh
+# Upgrade the packages
+1. adonis-upgrade-kit upgrade-packages
+
+# Move to ESM by updating tsconfig.json and package.json
+2. adonis-upgrade-kit upgrade-module-system
+
+# Upgrade Eslint and prettier setup
+3. adonis-upgrade-kit upgrade-eslint-prettier
+
+# Move the the new Env API
+7. adonis-upgrade-kit upgrade-env-config
+
+# Move from the old aliases to Node.js subpaths imports
+4. adonis-upgrade-kit upgrade-aliases
+
+# Move from the old IoC container to the new one
+5. adonis-upgrade-kit migrate-ioc-imports
+
+# Fix relative imports and add .js extensions ( needed for ESM )
+6. adonis-upgrade-kit fix-relative-imports
+
+# Add new entrypoints needed for Adonis.js v6
+8. adonis-upgrade-kit upgrade-entrypoints
+
+# Move from .adonisrc.json to adonisrc.ts
+9. adonis-upgrade-kit upgrade-rcfile
+```
 
 [github-actions-image]: https://img.shields.io/github/actions/workflow/status/adonisjs/upgrade-kit/test.yml?style=for-the-badge "github-actions"
 

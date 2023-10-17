@@ -63,6 +63,11 @@ export class EnvConfig extends BasePatcher {
     })
 
     /**
+     * Move it to start/env.ts
+     */
+    file.moveImmediately('start/env.ts')
+
+    /**
      * And delete the old contracts/env.ts
      */
     this.runner.project.getSourceFile('contracts/env.ts')?.delete()

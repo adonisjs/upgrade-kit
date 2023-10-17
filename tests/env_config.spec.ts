@@ -26,7 +26,7 @@ test.group('Env config', () => {
     }).run()
 
     await assert.fileContains(
-      'env.ts',
+      'start/env.ts',
       dedent`
       import { Env } from "@adonisjs/core/env";
 

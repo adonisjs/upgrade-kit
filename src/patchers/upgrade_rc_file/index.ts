@@ -5,7 +5,7 @@ import { ObjectLiteralExpression, SyntaxKind } from 'ts-morph'
 
 import { BasePatcher } from '../base_patcher.js'
 import { PatcherFactory } from '../../types/index.js'
-import { commandsRewriteMapping, providersRewriteMapping } from '../../rewrite_maps.js'
+import { commandsRewriteMapping } from '../../rewrite_maps.js'
 
 export function upgradeRcFile(): PatcherFactory {
   return (runner) => new UpgradeRcFile(runner)

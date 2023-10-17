@@ -7,6 +7,7 @@ import { sessionConfig } from '../patchers/config_files/session_config.js'
 import { bodyparserConfig } from '../patchers/config_files/bodyparser_config.js'
 import { databaseConfig } from '../patchers/config_files/database_config.js'
 import { hashConfig } from '../patchers/config_files/hash_config.js'
+import { shieldConfig } from '../patchers/config_files/shield_config.js'
 
 export class UpgradeConfigFiles extends BaseCommand {
   static commandName = `upgrade-config-files`
@@ -24,6 +25,7 @@ export class UpgradeConfigFiles extends BaseCommand {
         staticConfig(),
         databaseConfig(),
         hashConfig(),
+        shieldConfig(),
       ],
       projectPath: this.projectPath,
     }).run()

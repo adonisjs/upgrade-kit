@@ -1,10 +1,10 @@
 import { Runner } from '../runner.js'
 import { BaseCommand } from './base_command.js'
-import { appConfig } from '../patchers/app_config/index.js'
-import { corsConfig } from '../patchers/cors_config/index.js'
-import { staticConfig } from '../patchers/static_config/index.js'
-import { sessionConfig } from '../patchers/session_config/index.js'
-import { bodyparserConfig } from '../patchers/bodyparser_config/index.js'
+import { appConfig } from '../patchers/config_files/app_config.js'
+import { corsConfig } from '../patchers/config_files/cors_config.js'
+import { staticConfig } from '../patchers/config_files/static_config.js'
+import { sessionConfig } from '../patchers/config_files/session_config.js'
+import { bodyparserConfig } from '../patchers/config_files/bodyparser_config.js'
 
 export class UpgradeConfigFiles extends BaseCommand {
   static commandName = `upgrade-config-files`

@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 import dedent from 'dedent'
 import { createRunner } from '../test_helpers/index.js'
-import { appConfig } from '../src/patchers/app_config/index.js'
+import { appConfig } from '../src/patchers/config_files/app_config.js'
 
 test.group('App config', () => {
   test('Update app http config', async ({ assert, fs }) => {

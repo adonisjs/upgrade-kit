@@ -2,7 +2,7 @@ import { test } from '@japa/runner'
 import dedent from 'dedent'
 
 import { createRunner } from '../test_helpers/index.js'
-import { bodyparserConfig } from '../src/patchers/bodyparser_config/index.js'
+import { bodyparserConfig } from '../src/patchers/config_files/bodyparser_config.js'
 
 test.group('Bodyparser config', () => {
   test('Update bodyparser config', async ({ assert, fs }) => {

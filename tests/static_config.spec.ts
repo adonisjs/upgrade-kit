@@ -2,7 +2,7 @@ import dedent from 'dedent'
 import { test } from '@japa/runner'
 
 import { createRunner } from '../test_helpers/index.js'
-import { staticConfig } from '../src/patchers/static_config/index.js'
+import { staticConfig } from '../src/patchers/config_files/static_config.js'
 
 test.group('Static config', () => {
   test('Update static config', async ({ assert, fs }) => {

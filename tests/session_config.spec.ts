@@ -2,7 +2,7 @@ import { test } from '@japa/runner'
 import dedent from 'dedent'
 
 import { createRunner } from '../test_helpers/index.js'
-import { sessionConfig } from '../src/patchers/session_config/index.js'
+import { sessionConfig } from '../src/patchers/config_files/session_config.js'
 
 test.group('Session config', () => {
   test('Update session config', async ({ assert, fs }) => {

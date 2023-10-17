@@ -31,8 +31,8 @@ export default defineConfig({
   |
   */
   preloads: [
-    () => import('./foo/bar'),
-    () => import('./bar/foo')
+    () => import('./foo/bar.js'),
+    () => import('./bar/foo.js')
   ]
 });
 "`
@@ -57,7 +57,7 @@ export default defineConfig({
       file: () => import('./bar/foo'),
       environment: [\\"console\\", \\"repl\\"],
     },
-    () => import('./hello')
+    () => import('./hello.js')
   ]
 });
 "`

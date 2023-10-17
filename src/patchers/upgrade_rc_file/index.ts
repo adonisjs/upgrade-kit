@@ -105,7 +105,7 @@ export class UpgradeRcFile extends BasePatcher {
 
     const preloadsArray = oldPreloads.map((preload) => {
       if (typeof preload === 'string') {
-        return `() => import('${preload}')`
+        return `() => import('${preload}.js')`
       }
 
       return `{

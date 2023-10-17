@@ -10,6 +10,7 @@ import { FixRelativeImports } from './src/commands/fix_relative_imports.js'
 import { UpgradeConfigFiles } from './src/commands/upgrade_config_files.js'
 import { UpgradeModuleSystem } from './src/commands/upgrade_module_system.js'
 import { UpgradeEslintPrettier } from './src/commands/upgrade_eslint_prettier.js'
+import { UpgradeCommandOptions } from './src/commands/upgrade_command_options.js'
 
 export const kernel = Kernel.create().addLoader(
   new ListLoader([
@@ -23,5 +24,6 @@ export const kernel = Kernel.create().addLoader(
     UpgradeRcFile,
     UpgradeEslintPrettier,
     UpgradeConfigFiles,
+    UpgradeCommandOptions,
   ])
 )

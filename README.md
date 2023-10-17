@@ -54,8 +54,11 @@ The commands should ideally be run in the following order:
 # Update config/*.ts files to use their new APIs
 9. adonis-upgrade-kit upgrade-config-files
 
+# Update the command `options` property to use the new API
+10. adonis-upgrade-kit upgrade-command-options
+
 # Move from .adonisrc.json to adonisrc.ts
-10. adonis-upgrade-kit upgrade-rcfile
+11. adonis-upgrade-kit upgrade-rcfile
 ```
 
 [github-actions-image]: https://img.shields.io/github/actions/workflow/status/adonisjs/upgrade-kit/test.yml?style=for-the-badge "github-actions"

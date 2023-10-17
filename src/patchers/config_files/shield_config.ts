@@ -41,6 +41,7 @@ export class ShieldConfig extends ConfigUpdaterPatcher {
      * Write the new file
      */
     const newContent = `
+    import env from '#start/env'
     import { defineConfig } from '@adonisjs/shield'
 
     export default defineConfig(${configObjectLiteral})

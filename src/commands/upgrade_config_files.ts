@@ -5,6 +5,7 @@ import { corsConfig } from '../patchers/config_files/cors_config.js'
 import { staticConfig } from '../patchers/config_files/static_config.js'
 import { sessionConfig } from '../patchers/config_files/session_config.js'
 import { bodyparserConfig } from '../patchers/config_files/bodyparser_config.js'
+import { databaseConfig } from '../patchers/config_files/database_config.js'
 
 export class UpgradeConfigFiles extends BaseCommand {
   static commandName = `upgrade-config-files`
@@ -14,7 +15,14 @@ export class UpgradeConfigFiles extends BaseCommand {
     this.displayHeading()
 
     await new Runner({
-      patchers: [appConfig(), bodyparserConfig(), corsConfig(), sessionConfig(), staticConfig()],
+      patchers: [
+        appConfig(),
+        bodyparserConfig(),
+        corsConfig(),
+        sessionConfig(),
+        staticConfig(),
+        databaseConfig(),
+      ],
       projectPath: this.projectPath,
     }).run()
 

@@ -1,5 +1,5 @@
 exports[`Database config > Update database config 1`] = `"import Env from '@ioc:Adonis/Core/Env'
-import { defineConfig } from \\"@adonisjs/database\\";
+import { defineConfig } from \\"@adonisjs/lucid\\";
 
 const databaseConfig = defineConfig({
   connection: Env.get('DB_CONNECTION'),

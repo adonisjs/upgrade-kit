@@ -20,7 +20,7 @@ export class DatabaseConfig extends ConfigUpdaterPatcher {
     this.replaceOldLiteralConfigWithDefineConfig({
       file,
       oldTypeImport: '@ioc:Adonis/Lucid/Database',
-      defineConfigImport: '@adonisjs/database',
+      defineConfigImport: '@adonisjs/lucid',
       variableName: 'databaseConfig',
     })
 

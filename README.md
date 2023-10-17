@@ -51,8 +51,11 @@ The commands should ideally be run in the following order:
 # Add new entrypoints needed for Adonis.js v6
 8. adonis-upgrade-kit upgrade-entrypoints
 
+# Update config/*.ts files to use their new APIs
+9. adonis-upgrade-kit upgrade-config-files
+
 # Move from .adonisrc.json to adonisrc.ts
-9. adonis-upgrade-kit upgrade-rcfile
+10. adonis-upgrade-kit upgrade-rcfile
 ```
 
 [github-actions-image]: https://img.shields.io/github/actions/workflow/status/adonisjs/upgrade-kit/test.yml?style=for-the-badge "github-actions"

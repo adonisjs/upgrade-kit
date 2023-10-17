@@ -58,6 +58,7 @@ test.group('Shield config', () => {
     const content = await fs.contents('config/shield.ts')
     assert.snapshot(content).matchInline(`
       "
+      import env from '#start/env'
       import { defineConfig } from '@adonisjs/shield'
 
       export default defineConfig({

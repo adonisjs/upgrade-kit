@@ -49,6 +49,12 @@ export class UpgradeEntrypoints extends BasePatcher {
       }),
 
       /**
+       * Remove old entrypoints
+       */
+      rmIfExists(join(rootDir, 'server.ts')),
+      rmIfExists(join(rootDir, 'test.ts')),
+
+      /**
        * Ace file and also remove the old commands/index file
        */
       rmIfExists(join(rootDir, 'ace')),

@@ -112,10 +112,15 @@ test.group('Upgrade rc file', () => {
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })
 
-  test('replace adonisjs/core with new providers', async ({ assert, fs }) => {
+  test('keep providers environments', async ({ assert, fs }) => {
     await fs.setupProject({
       rcFile: {
-        providers: ['@adonisjs/core'],
+        providers: [
+          {
+            file: '@adonisjs/core/providers/repl_provider',
+            environment: ['repl', 'test'],
+          },
+        ],
       },
     })
 
@@ -124,11 +129,9 @@ test.group('Upgrade rc file', () => {
     assert.snapshot(await fs.contents('adonisrc.ts')).match()
   })
 
-  test('replace old providers with new one', async ({ assert, fs }) => {
+  test('add extensions to local providers', async ({ assert, fs }) => {
     await fs.setupProject({
-      rcFile: {
-        providers: ['@adonisjs/session', '@adonisjs/view', '@adonisjs/redis'],
-      },
+      rcFile: { providers: ['./providers/AppProvider', '@adonisjs/core/providers/AppProvider'] },
     })
 
     await createRunner({ projectPath: fs.basePath, patchers: [upgradeRcFile()] }).run()

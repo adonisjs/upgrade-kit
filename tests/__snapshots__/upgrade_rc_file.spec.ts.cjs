@@ -81,50 +81,6 @@ export default defineConfig({
 });
 "`
 
-exports[`Upgrade rc file > replace adonisjs/core with new providers 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
-
-export default defineConfig({
-  /*
-  |--------------------------------------------------------------------------
-  | Service providers
-  |--------------------------------------------------------------------------
-  |
-  | List of service providers to import and register when booting the
-  | application
-  |
-  */
-  providers: [
-    () => import('@adonisjs/core/providers/app_provider'),
-    () => import('@adonisjs/core/providers/http_provider'),
-    () => import('@adonisjs/core/providers/hash_provider'),
-    {
-      file: () => import('@adonisjs/core/providers/repl_provider'),
-      environment: [\\"repl\\", \\"test\\"],
-    }
-  ]
-});
-"`
-
-exports[`Upgrade rc file > replace old providers with new one 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
-
-export default defineConfig({
-  /*
-  |--------------------------------------------------------------------------
-  | Service providers
-  |--------------------------------------------------------------------------
-  |
-  | List of service providers to import and register when booting the
-  | application
-  |
-  */
-  providers: [
-    () => import('@adonisjs/session/session_provider'),
-    () => import('@adonisjs/view/views_provider'),
-    () => import('@adonisjs/redis/redis_provider')
-  ]
-});
-"`
-
 exports[`Upgrade rc file > migrate directories 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
 
 export default defineConfig({
@@ -170,6 +126,43 @@ export default defineConfig({
       }
     ]
   }
+});
+"`
+
+exports[`Upgrade rc file > keep providers environments 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+
+export default defineConfig({
+  /*
+  |--------------------------------------------------------------------------
+  | Service providers
+  |--------------------------------------------------------------------------
+  |
+  | List of service providers to import and register when booting the
+  | application
+  |
+  */
+  providers: [
+    { \\"file\\": () => import('@adonisjs/core/providers/repl_provider'), \\"environment\\": [\\"repl\\", \\"test\\"] }
+  ]
+});
+"`
+
+exports[`Upgrade rc file > add extensions to local providers 1`] = `"import { defineConfig } from \\"@adonisjs/core/app\\";
+
+export default defineConfig({
+  /*
+  |--------------------------------------------------------------------------
+  | Service providers
+  |--------------------------------------------------------------------------
+  |
+  | List of service providers to import and register when booting the
+  | application
+  |
+  */
+  providers: [
+    () => import('./providers/AppProvider.js'),
+    () => import('@adonisjs/core/providers/AppProvider')
+  ]
 });
 "`
 

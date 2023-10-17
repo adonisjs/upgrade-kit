@@ -133,23 +133,21 @@ export class UpgradeRcFile extends BasePatcher {
   }
 
   #migrateProviders(defineConfig: ObjectLiteralExpression) {
-    const oldProviders: string[] = this.#jsonRcFileContents.providers ?? []
+    const oldProviders: Array<string | Record<string, any>> =
+      this.#jsonRcFileContents.providers ?? []
 
-    const newProviders = oldProviders.flatMap((provider) => {
-      const rewrittenProvider = providersRewriteMapping[provider]
+    const newProviders = oldProviders.map((provider) => {
+      if (typeof provider === 'string') {
+        const isLocalProvider = provider.startsWith('./')
+        if (isLocalProvider) provider += '.js'
 
-      if (!rewrittenProvider) return [`() => import('${provider}')`]
+        return `() => import('${provider}')`
+      } else {
+        const fileImport = `() => import('${provider.file}')`
+        const { file, ...rest } = provider
 
-      return rewrittenProvider.map((newProvider) => {
-        if (typeof newProvider === 'string') {
-          return `() => import('${newProvider}')`
-        }
-
-        return `{
-          file: () => import('${newProvider.file}'),
-          environment: ${JSON.stringify(newProvider.environment)},
-        }`
-      })
+        return `{ "file": ${fileImport}, ${JSON.stringify(rest).slice(1)}`
+      }
     })
 
     if (!newProviders.length) return

@@ -24,7 +24,7 @@ export class UpgradePackages extends BasePatcher {
   #rootDir!: string
   #skipInstall = false
 
-  #packagesToRemove = ['@adonisjs/repl', 'source-map-support']
+  #packagesToRemove = ['@adonisjs/repl', 'source-map-support', 'youch', 'youch-terminal']
   #packagesToSwap = [
     { old: 'phc-argon2', name: 'argon2', isDev: false },
     { old: 'phc-bcrypt', name: 'bcrypt', isDev: false },

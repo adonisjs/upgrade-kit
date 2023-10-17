@@ -133,7 +133,7 @@ export class UpgradePackages extends BasePatcher {
     const { devPackages, prodPackages } = this.#filterDevAndProdPackages(this.#packagesToAdd)
 
     const hasCorsConfig = project.getSourceFile(join(this.#rootDir, 'config/cors.ts'))
-    if (hasCorsConfig) prodPackages.push('@adonisjs/cors')
+    if (hasCorsConfig) prodPackages.push('@adonisjs/cors@next')
 
     const hasStaticConfig = project.getSourceFile(join(this.#rootDir, 'config/static.ts'))
     if (hasStaticConfig) prodPackages.push('@adonisjs/static')

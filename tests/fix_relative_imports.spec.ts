@@ -93,8 +93,17 @@ test.group('Fix relative imports', () => {
   })
 
   test('does not add js extensions to subpath imports', async ({ assert, fs }) => {
-    await fs.setupProject({})
+    await fs.setupProject({
+      tsconfig: {
+        compilerOptions: {
+          paths: {
+            '#foo/*': ['./foo/*.js'],
+          },
+        },
+      },
+    })
 
+    await fs.create('foo/bar.ts', dedent`export const foo = 'bar'`)
     await fs.create('index.ts', dedent`import { foo } from '#foo/bar'`)
 
     await createRunner({
@@ -105,7 +114,7 @@ test.group('Fix relative imports', () => {
     await assert.fileEquals('index.ts', dedent`import { foo } from '#foo/bar'`)
   })
 
-  test('add extensions to subpath imports that are directories', async ({ assert, fs }) => {
+  test('add index to subpath imports that are directories', async ({ assert, fs }) => {
     await fs.setupProject({
       pkgJson: {
         imports: {
@@ -122,7 +131,7 @@ test.group('Fix relative imports', () => {
       patchers: [fixRelativeImports()],
     }).run()
 
-    await assert.fileEquals('index.ts', dedent`import { foo } from '#helpers/index.js'`)
+    await assert.fileEquals('index.ts', dedent`import { foo } from '#helpers/index'`)
   })
 
   test('handle ./index imports', async ({ assert, fs }) => {

@@ -90,8 +90,8 @@ test.group('Upgrade aliases', () => {
     assert.deepEqual(rcFile, {})
 
     const tsConfig = await fs.contentsJson('tsconfig.json')
-    assert.deepPropertyVal(tsConfig.compilerOptions.paths, '#app/*', ['./app/*'])
-    assert.deepPropertyVal(tsConfig.compilerOptions.paths, '#contracts/*', ['./contracts/*'])
+    assert.deepPropertyVal(tsConfig.compilerOptions.paths, '#app/*', ['./app/*.js'])
+    assert.deepPropertyVal(tsConfig.compilerOptions.paths, '#contracts/*', ['./contracts/*.js'])
 
     const pkgJson = await fs.contentsJson('package.json')
     assert.deepPropertyVal(pkgJson.imports, '#app/*', './app/*.js')

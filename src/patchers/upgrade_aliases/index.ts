@@ -10,16 +10,16 @@ export function upgradeAliases(): PatcherFactory {
  * The default ts paths provided with Adonis v6
  */
 const DEFAULT_TS_PATHS = {
-  '#controllers/*': ['./app/controllers/*'],
-  '#exceptions/*': ['./app/exceptions/*'],
-  '#models/*': ['./app/models/*'],
-  '#services/*': ['./app/services/*'],
-  '#listeners/*': ['./app/listeners/*'],
-  '#events/*': ['./app/events/*'],
-  '#middleware/*': ['./app/middleware/*'],
-  '#validators/*': ['./app/validators/*'],
-  '#start/*': ['./start/*'],
-  '#config/*': ['./config/*'],
+  '#controllers/*': ['./app/controllers/*.js'],
+  '#exceptions/*': ['./app/exceptions/*.js'],
+  '#models/*': ['./app/models/*.js'],
+  '#services/*': ['./app/services/*.js'],
+  '#listeners/*': ['./app/listeners/*.js'],
+  '#events/*': ['./app/events/*.js'],
+  '#middleware/*': ['./app/middleware/*.js'],
+  '#validators/*': ['./app/validators/*.js'],
+  '#start/*': ['./start/*.js'],
+  '#config/*': ['./config/*.js'],
 }
 
 /**
@@ -60,7 +60,7 @@ export class UpgradeAliases extends BasePatcher {
     return Object.entries(aliases).reduce(
       (acc, [alias, path]) => {
         const tsPathKey = `#${alias.toLowerCase()}/*`
-        const tsPathValue = ['./' + path + '/*']
+        const tsPathValue = ['./' + path + '/*.js']
 
         acc[tsPathKey] = tsPathValue
         return acc
@@ -78,7 +78,7 @@ export class UpgradeAliases extends BasePatcher {
     return Object.entries(tsPaths).reduce(
       (acc, [tsPathKey, tsPathValue]) => {
         const subpathKey = tsPathKey
-        const subpathValue = `${tsPathValue}.js`
+        const subpathValue = `${tsPathValue}`
 
         acc[subpathKey] = subpathValue
 

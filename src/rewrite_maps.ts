@@ -133,6 +133,10 @@ export const newImportsMapping: ImportMap = {
    * ------------------------------------------------------
    */
   '@ioc:Adonis/Core/View': {
+    'default': {
+      newName: 'edge',
+      newPath: 'edge.js',
+    },
     '*': {
       newPath: 'edge.js',
     },
@@ -147,6 +151,10 @@ export const newImportsMapping: ImportMap = {
     'default': {
       newName: 'mail',
       newPath: '@adonisjs/mail/services/main',
+    },
+    'MessageContract': {
+      newName: 'Message',
+      newPath: '@adonisjs/mail',
     },
     '*': {
       newPath: '@adonisjs/mail',

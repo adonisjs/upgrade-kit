@@ -38,16 +38,27 @@ export class FixRelativeImports extends BasePatcher {
         const moduleSpecifier = importNode.getModuleSpecifierValue()
 
         const isRelativeImport = moduleSpecifier.startsWith('.')
+        const isSubpathImport = moduleSpecifier.startsWith('#')
         const hasExtension = !!extname(moduleSpecifier)
 
-        if (!isRelativeImport || hasExtension) {
+        if (hasExtension || !(isRelativeImport || isSubpathImport)) {
           continue
         }
 
-        const importedSourcePath = importNode.getModuleSpecifierSourceFile()?.getFilePath()
+        let importedSourcePath = importNode.getModuleSpecifierSourceFile()?.getFilePath().toString()
+
+        // If we cant resolve the source file, we assume this is a broken subpath import missing the index part
+        if (!importedSourcePath) {
+          importedSourcePath = importNode.getModuleSpecifierValue() + '/index.ts'
+        }
 
         if (importedSourcePath?.endsWith('index.ts') && !moduleSpecifier.endsWith('index')) {
           this.#changes.push({ importNode, newModuleSpecifier: `${moduleSpecifier}/index.js` })
+          continue
+        }
+
+        // If import is a subpath import, we don't need to add the extension
+        if (!isSubpathImport) {
           continue
         }
 

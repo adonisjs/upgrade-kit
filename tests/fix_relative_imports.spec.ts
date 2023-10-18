@@ -105,6 +105,26 @@ test.group('Fix relative imports', () => {
     await assert.fileEquals('index.ts', dedent`import { foo } from '#foo/bar'`)
   })
 
+  test('add extensions to subpath imports that are directories', async ({ assert, fs }) => {
+    await fs.setupProject({
+      pkgJson: {
+        imports: {
+          '#helpers/*': './helpers/*.js',
+        },
+      },
+    })
+
+    await fs.create('helpers/index.ts', dedent`export const foo = 'bar'`)
+    await fs.create('index.ts', dedent`import { foo } from '#helpers'`)
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [fixRelativeImports()],
+    }).run()
+
+    await assert.fileEquals('index.ts', dedent`import { foo } from '#helpers/index.js'`)
+  })
+
   test('handle ./index imports', async ({ assert, fs }) => {
     await fs.setupProject({})
 

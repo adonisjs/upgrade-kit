@@ -151,6 +151,7 @@ test.group('Upgrade Packages', (group) => {
         environment: ['repl', 'test'],
       },
       '@adonisjs/session/session_provider',
+      '@adonisjs/core/providers/edge_provider',
       '@adonisjs/shield/shield_provider',
     ])
   })

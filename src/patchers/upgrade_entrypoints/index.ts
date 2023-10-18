@@ -55,9 +55,10 @@ export class UpgradeEntrypoints extends BasePatcher {
       rmIfExists(join(rootDir, 'test.ts')),
 
       /**
-       * Ace file and also remove the old commands/index file
+       * Remove old files
        */
       rmIfExists(join(rootDir, 'ace')),
+      rmIfExists(join(rootDir, 'ace-manifest.json')),
       rmIfExists(join(rootDir, 'commands', 'index.ts')),
       writeFile(join(rootDir, 'ace.js'), aceTemplate).then(() => {
         this.logger.info('Created ace.js')

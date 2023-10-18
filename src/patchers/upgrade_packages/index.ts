@@ -36,6 +36,7 @@ export class UpgradePackages extends BasePatcher {
   #packagesToAdd = [
     { name: 'ts-node', isDev: true },
     { name: '@swc/core', isDev: true },
+    { name: '@types/luxon', isDev: true },
     { name: '@adonisjs/tsconfig', isDev: true },
     { name: '@adonisjs/validator@next', isDev: false },
   ]
@@ -45,7 +46,8 @@ export class UpgradePackages extends BasePatcher {
     { name: '@adonisjs/lucid', isDev: false },
     { name: '@adonisjs/session', isDev: false },
     { name: '@adonisjs/shield', isDev: false },
-    { name: '@adonisjs/view', isDev: false },
+    { name: '@adonisjs/redis', isDev: false },
+    { name: '@adonisjs/ally', isDev: false },
     { name: '@adonisjs/mail', isDev: false },
     { name: '@japa/browser-client', isDev: true },
     { name: '@japa/runner', isDev: true },

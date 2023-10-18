@@ -245,6 +245,17 @@ export const newImportsMapping: ImportMap = {
     'ModelOptions': { newPath: '@adonisjs/lucid/types/model' },
     'ModelAdapterOptions': { newPath: '@adonisjs/lucid/types/model' },
     'ModelAssignOptions': { newPath: '@adonisjs/lucid/types/model' },
+    'ModelObject': { newPath: ' @adonisjs/lucid/types/model' },
+    'LucidRowPreload': { newPath: ' @adonisjs/lucid/types/model' },
+    'LucidRowAggregate': { newPath: ' @adonisjs/lucid/types/model' },
+    'ModelPaginatorContract': { newPath: ' @adonisjs/lucid/types/model' },
+    'LazyLoadAggregatesContract': { newPath: ' @adonisjs/lucid/types/model' },
+    'ModelQueryBuilderContract': { newPath: ' @adonisjs/lucid/types/model' },
+    'ModelKeysContract': { newPath: ' @adonisjs/lucid/types/model' },
+    'LucidRow': { newPath: ' @adonisjs/lucid/types/model' },
+    'LucidModel': { newPath: ' @adonisjs/lucid/types/model' },
+    'AdapterContract': { newPath: ' @adonisjs/lucid/types/model' },
+    'NamingStrategyContract': { newPath: ' @adonisjs/lucid/types/model' },
 
     /**
      * Querybuilder types

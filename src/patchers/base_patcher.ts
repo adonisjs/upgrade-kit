@@ -1,6 +1,7 @@
 import { Project, SourceFile } from 'ts-morph'
 import { Runner } from '../runner.js'
 import { PatcherContract, PatcherFactory } from '../types/index.js'
+import { Colors } from '@poppinss/cliui/types'
 
 export abstract class BasePatcher implements PatcherContract {
   declare static patcherName: string
@@ -19,7 +20,7 @@ export abstract class BasePatcher implements PatcherContract {
     return this.runner.ui.logger
   }
 
-  get colors() {
+  get colors(): Colors {
     return this.runner.ui.colors
   }
 

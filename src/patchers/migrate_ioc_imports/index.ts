@@ -154,6 +154,7 @@ export class MigrateIocImports extends BasePatcher {
     const tsFiles = this.project.getSourceFiles()
 
     for (let file of tsFiles) {
+      this.logger.info(`Patching ${file.getFilePath()}`)
       this.#processFile(file)
     }
 

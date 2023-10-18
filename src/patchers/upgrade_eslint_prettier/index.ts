@@ -1,4 +1,3 @@
-import { execa } from 'execa'
 import { join } from 'node:path'
 import { detectPackageManager, installPackage } from '@antfu/install-pkg'
 
@@ -39,11 +38,12 @@ export class UpgradeEslintPrettier extends BasePatcher {
     /**
      * Remove old eslint/prettier packages
      */
-    await execa(
-      this.#pkgManager,
-      ['remove', 'eslint-config-prettier', 'eslint-plugin-adonis', 'eslint-plugin-prettier'],
-      { cwd: rootDir }
-    )
+    let pkgJson = this.runner.pkgJsonFile.reload().get()
+    delete pkgJson.devDependencies?.['eslint-config-prettier']
+    delete pkgJson.devDependencies?.['eslint-plugin-adonis']
+    delete pkgJson.devDependencies?.['eslint-plugin-prettier']
+
+    await this.runner.pkgJsonFile.save()
 
     /**
      * Install new eslint/prettier packages
@@ -61,7 +61,7 @@ export class UpgradeEslintPrettier extends BasePatcher {
     /**
      * Add new configuration for eslint/prettier
      */
-    const pkgJson = this.runner.pkgJsonFile.reload().get()
+    pkgJson = this.runner.pkgJsonFile.reload().get()
 
     pkgJson.eslintConfig = {
       extends: ['@adonisjs/eslint-config/app'],

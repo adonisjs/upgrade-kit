@@ -52,6 +52,21 @@ test.group('Upgrade Eslint Prettier', (group) => {
     assert.isUndefined(pkgJson.devDependencies?.['eslint-plugin-prettier'])
   })
 
+  test('works even if old packages are not installed', async ({ assert, fs }) => {
+    await fs.setupProject({})
+
+    await createRunner({
+      patchers: [upgradeEslintPrettier('pnpm')],
+      projectPath: fs.basePath,
+    }).run()
+
+    const pkgJson = await fs.contentsJson('package.json')
+    assert.isUndefined(pkgJson.devDependencies?.['eslint-config-prettier'])
+    assert.isUndefined(pkgJson.devDependencies?.['eslint-plugin-adonis'])
+    assert.isDefined(pkgJson.devDependencies?.['@adonisjs/eslint-config'])
+    assert.isDefined(pkgJson.devDependencies?.['@adonisjs/prettier-config'])
+  })
+
   test('add new packages', async ({ assert, fs }) => {
     await fs.setupProject({
       pkgJson: {

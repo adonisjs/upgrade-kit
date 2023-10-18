@@ -39,15 +39,6 @@ export const newImportsMapping: ImportMap = {
       newPath: '@adonisjs/core/events',
     },
   },
-  '@ioc:Adonis/Core/Logger': {
-    'default': {
-      newName: 'logger',
-      newPath: '@adonisjs/core/services/logger',
-    },
-    '*': {
-      newPath: '@adonisjs/core/logger',
-    },
-  },
   '@ioc:Adonis/Core/Application': {
     'default': {
       newName: 'app',
@@ -92,11 +83,6 @@ export const newImportsMapping: ImportMap = {
       newPath: '@adonisjs/core/hash',
     },
   },
-  '@ioc:Adonis/Core/Validator': {
-    '*': {
-      newPath: '@adonisjs/validator',
-    },
-  },
   '@ioc:Adonis/Core/Server': {
     'default': {
       newName: 'server',
@@ -125,6 +111,98 @@ export const newImportsMapping: ImportMap = {
     '*': {
       newPath: '@adonisjs/session',
     },
+  },
+
+  /**
+   * ------------------------------------------------------
+   * Logger
+   * ------------------------------------------------------
+   */
+  '@ioc:Adonis/Core/Logger': {
+    'default': {
+      newName: 'logger',
+      newPath: '@adonisjs/core/services/logger',
+    },
+    '*': {
+      newPath: '@adonisjs/core/logger',
+    },
+
+    /**
+     * Types
+     */
+    'FileTargetOptions': { newPath: '@adonisjs/core/types/logger' },
+    'LoggerConfig': { newPath: '@adonisjs/core/types/logger' },
+    'LoggerManagerConfig': { newPath: '@adonisjs/core/types/logger' },
+    'PrettyTargetOptions ': { newPath: '@adonisjs/core/types/logger' },
+    'TimestampKeywords': { newPath: '@adonisjs/core/types/logger' },
+  },
+
+  /**
+   * ------------------------------------------------------
+   * Validator
+   * ------------------------------------------------------
+   */
+  '@ioc:Adonis/Core/Validator': {
+    '*': {
+      newPath: '@adonisjs/validator',
+    },
+
+    /**
+     * Types
+     */
+    'DurationUnits': { newPath: '@adonisjs/validator/types' },
+    'Rule': { newPath: '@adonisjs/validator/types' },
+    'SchemaRef': { newPath: '@adonisjs/validator/types' },
+    'ParsedRule': { newPath: '@adonisjs/validator/types' },
+    'SchemaLiteral': { newPath: '@adonisjs/validator/types' },
+    'SchemaObject': { newPath: '@adonisjs/validator/types' },
+    'SchemaArray': { newPath: '@adonisjs/validator/types' },
+    'ParsedSchemaTree': { newPath: '@adonisjs/validator/types' },
+    'ValidationRuntimeOptions': { newPath: '@adonisjs/validator/types' },
+    'NodeType': { newPath: '@adonisjs/validator/types' },
+    'NodeSubType': { newPath: '@adonisjs/validator/types' },
+    'ValidationField': { newPath: '@adonisjs/validator/types' },
+    'AsyncValidation': { newPath: '@adonisjs/validator/types' },
+    'SyncValidation': { newPath: '@adonisjs/validator/types' },
+    'JsonApiErrorNode': { newPath: '@adonisjs/validator/types' },
+    'ApiErrorNode': { newPath: '@adonisjs/validator/types' },
+    'VanillaErrorNode': { newPath: '@adonisjs/validator/types' },
+    'ValidationContract': { newPath: '@adonisjs/validator/types' },
+    'TypedSchema': { newPath: '@adonisjs/validator/types' },
+    'AllowedEnumOptions': { newPath: '@adonisjs/validator/types' },
+    'EnumReturnValue': { newPath: '@adonisjs/validator/types' },
+    'EnumSetReturnValue': { newPath: '@adonisjs/validator/types' },
+    'ParsedTypedSchema': { newPath: '@adonisjs/validator/types' },
+    'ValidatorConfig': { newPath: '@adonisjs/validator/types' },
+    'RequestNegotiator': { newPath: '@adonisjs/validator/types' },
+    'DefaultMessagesCallback': { newPath: '@adonisjs/validator/types' },
+    'ValidatorResolvedConfig': { newPath: '@adonisjs/validator/types' },
+    'ValidatorNode': { newPath: '@adonisjs/validator/types' },
+    'RequestValidatorNode': { newPath: '@adonisjs/validator/types' },
+    'ValidateFn': { newPath: '@adonisjs/validator/types' },
+    'EmailRuleOptions': { newPath: '@adonisjs/validator/types' },
+    'EmailValidationOptions': { newPath: '@adonisjs/validator/types' },
+    'EmailNormalizationOptions': { newPath: '@adonisjs/validator/types' },
+    'UrlValidationOptions': { newPath: '@adonisjs/validator/types' },
+    'UrlOptions': { newPath: '@adonisjs/validator/types' },
+    'UrlNormalizationOptions': { newPath: '@adonisjs/validator/types' },
+    'CustomMessages': { newPath: '@adonisjs/validator/types' },
+    'MessagesBagContract': { newPath: '@adonisjs/validator/types' },
+    'ErrorReporterContract': { newPath: '@adonisjs/validator/types' },
+    'ErrorReporterConstructorContract': { newPath: '@adonisjs/validator/types' },
+    'CompilerOutput': { newPath: '@adonisjs/validator/types' },
+    'StringType': { newPath: '@adonisjs/validator/types' },
+    'DateType': { newPath: '@adonisjs/validator/types' },
+    'BooleanType': { newPath: '@adonisjs/validator/types' },
+    'NumberType': { newPath: '@adonisjs/validator/types' },
+    'ObjectType': { newPath: '@adonisjs/validator/types' },
+    'ArrayType': { newPath: '@adonisjs/validator/types' },
+    'EnumType': { newPath: '@adonisjs/validator/types' },
+    'EnumSetType': { newPath: '@adonisjs/validator/types' },
+    'FileType': { newPath: '@adonisjs/validator/types' },
+    'Schema': { newPath: '@adonisjs/validator/types' },
+    'Rules': { newPath: '@adonisjs/validator/types' },
+    'ValidationExceptionContract': { newPath: '@adonisjs/validator/types' },
   },
 
   /**

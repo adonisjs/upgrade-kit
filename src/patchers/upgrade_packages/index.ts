@@ -31,7 +31,7 @@ export class UpgradePackages extends BasePatcher {
     { old: 'phc-bcrypt', name: 'bcrypt', isDev: false },
     { old: '@japa/preset-adonis', name: '@japa/plugin-adonisjs', isDev: true },
     { old: 'adonis-preset-ts', name: '@adonisjs/tsconfig', isDev: true },
-    { old: '@adonisjs/view', name: 'edge@next', isDev: false },
+    { old: '@adonisjs/view', name: 'edge.js@next', isDev: false },
   ]
   #packagesToAdd = [
     { name: 'ts-node', isDev: true },

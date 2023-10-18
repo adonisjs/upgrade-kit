@@ -25,11 +25,13 @@ export class UpgradePackages extends BasePatcher {
   #skipInstall = false
 
   #packagesToRemove = ['@adonisjs/repl', 'source-map-support', 'youch', 'youch-terminal']
+
   #packagesToSwap = [
     { old: 'phc-argon2', name: 'argon2', isDev: false },
     { old: 'phc-bcrypt', name: 'bcrypt', isDev: false },
     { old: '@japa/preset-adonis', name: '@japa/plugin-adonisjs', isDev: true },
     { old: 'adonis-preset-ts', name: '@adonisjs/tsconfig', isDev: true },
+    { old: '@adonisjs/view', name: 'edge@next', isDev: false },
   ]
   #packagesToAdd = [
     { name: 'ts-node', isDev: true },

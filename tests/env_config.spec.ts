@@ -39,4 +39,29 @@ test.group('Env config', () => {
       `
     )
   })
+
+  test('delete old contract file', async ({ assert, fs }) => {
+    await fs.setupProject({})
+
+    await fs.create(
+      'env.ts',
+      dedent`
+      import Env from '@ioc:Adonis/Core/Env'
+
+      export default Env.rules({
+        HOST: Env.schema.string({ format: 'host' }),
+        PORT: Env.schema.number(),
+        APP_KEY: Env.schema.string(),
+        APP_NAME: Env.schema.string(),
+      })`
+    )
+    await fs.create('contracts/env.ts', 'export default {}')
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [envConfig()],
+    }).run()
+
+    await assert.fileNotExists('contracts/env.ts')
+  })
 })

@@ -1,6 +1,7 @@
 import { SyntaxKind } from 'ts-morph'
 import { PatcherFactory } from '../../types/index.js'
 import { BasePatcher } from '../base_patcher.js'
+import { join } from 'node:path'
 
 export function envConfig(): PatcherFactory {
   return (runner) => new EnvConfig(runner)
@@ -12,7 +13,7 @@ export function envConfig(): PatcherFactory {
 export class EnvConfig extends BasePatcher {
   static patcherName = 'env-config'
 
-  invoke() {
+  async invoke() {
     super.invoke()
 
     /**
@@ -65,14 +66,18 @@ export class EnvConfig extends BasePatcher {
     /**
      * Move it to start/env.ts
      */
-    file.moveImmediately('start/env.ts')
+    await file.moveImmediately('start/env.ts', { overwrite: true })
+    this.logger.info('Updated env.ts file')
 
     /**
      * And delete the old contracts/env.ts
      */
-    this.runner.project.getSourceFile('contracts/env.ts')?.delete()
+    const rootDir = this.runner.project.getRootDirectories()[0]
+    await this.runner.project
+      .getSourceFile(join(rootDir.getPath(), 'contracts', 'env.ts'))
+      ?.deleteImmediately()
 
-    this.logger.info('Updated env.ts file')
+    this.logger.info('Deleted contracts/env.ts file')
 
     this.exit()
   }

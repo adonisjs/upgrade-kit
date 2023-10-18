@@ -299,7 +299,7 @@ export const providersRewriteMapping = {
     },
   ],
   '@adonisjs/session': ['@adonisjs/session/session_provider'],
-  '@adonisjs/view': ['@adonisjs/view/views_provider'],
+  '@adonisjs/view': [],
   '@adonisjs/shield': ['@adonisjs/shield/shield_provider'],
   '@adonisjs/redis': ['@adonisjs/redis/redis_provider'],
   '@adonisjs/mail': ['@adonisjs/mail/mail_provider'],

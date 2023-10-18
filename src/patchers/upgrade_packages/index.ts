@@ -36,6 +36,7 @@ export class UpgradePackages extends BasePatcher {
   #packagesToAdd = [
     { name: 'ts-node', isDev: true },
     { name: '@swc/core', isDev: true },
+    { name: '@adonisjs/tsconfig', isDev: true },
     { name: '@adonisjs/validator@next', isDev: false },
   ]
   #packagesToUpgrade = [

@@ -73,7 +73,7 @@ export class ImportMapper {
    * Returns the new name for the given named import
    */
   getNewNamedImportName(oldModule: string, namedImport: string) {
-    return this.#importsMapping[oldModule][namedImport]?.newName
+    return this.#importsMapping[oldModule][namedImport]?.newName || namedImport
   }
 
   /**

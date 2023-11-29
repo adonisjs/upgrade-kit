@@ -21,7 +21,6 @@ export class BodyparserConfig extends ConfigUpdaterPatcher {
       file,
       oldTypeImport: '@ioc:Adonis/Core/Server',
       defineConfigImport: '@adonisjs/core/bodyparser',
-      variableName: 'bodyParserConfig',
     })
 
     await this.formatFile(file).save()

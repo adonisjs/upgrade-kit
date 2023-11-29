@@ -21,7 +21,6 @@ export class StaticConfig extends ConfigUpdaterPatcher {
       file,
       oldTypeImport: '@ioc:Adonis/Core/Static',
       defineConfigImport: '@adonisjs/static',
-      variableName: 'staticConfig',
     })
 
     await this.formatFile(file).save()

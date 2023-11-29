@@ -21,7 +21,6 @@ export class CorsConfig extends ConfigUpdaterPatcher {
       file,
       oldTypeImport: '@ioc:Adonis/Core/Cors',
       defineConfigImport: '@adonisjs/cors',
-      variableName: 'corsConfig',
     })
 
     await this.formatFile(file).save()

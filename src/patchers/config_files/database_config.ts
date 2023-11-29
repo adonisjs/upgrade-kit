@@ -21,7 +21,6 @@ export class DatabaseConfig extends ConfigUpdaterPatcher {
       file,
       oldTypeImport: '@ioc:Adonis/Lucid/Database',
       defineConfigImport: '@adonisjs/lucid',
-      variableName: 'databaseConfig',
     })
 
     await this.formatFile(file).save()

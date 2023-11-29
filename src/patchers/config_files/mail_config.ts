@@ -23,7 +23,6 @@ export class MailConfig extends ConfigUpdaterPatcher {
      * Rename import from @adonisjs/mail/build/config to @adonisjs/mail
      */
     const oldImport = file.getImportDeclaration('@adonisjs/mail/build/config')
-    console.log(oldImport?.getKindName())
     if (oldImport) {
       const namedImports = oldImport?.getNamedImports()
 

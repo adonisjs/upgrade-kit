@@ -41,5 +41,7 @@ const bodyParserConfig = defineConfig({
     types: ['multipart/form-data'],
   },
 })
+
+export default bodyParserConfig
 "`
 

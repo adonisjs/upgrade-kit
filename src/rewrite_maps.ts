@@ -336,6 +336,7 @@ export const newImportsMapping: ImportMap = {
     default: {
       newName: 'BaseSchema',
       newPath: '@adonisjs/lucid/schema',
+      isNowNamedImport: true,
     },
   },
   '@ioc:Adonis/Lucid/Database': {
@@ -460,6 +461,7 @@ export const newImportsMapping: ImportMap = {
  * MigrateRcFile patcher
  */
 export const commandsRewriteMapping = {
+  '@adonisjs/core/build/commands/index.js': '@adonisjs/core/commands',
   '@adonisjs/core/build/commands': '@adonisjs/core/commands',
   '@adonisjs/lucid/build/commands': '@adonisjs/lucid/commands',
   '@adonisjs/mail/build/commands': '@adonisjs/mail/commands',
@@ -473,7 +475,6 @@ export const commandsRewriteMapping = {
 export const providersRewriteMapping = {
   '@adonisjs/core': [
     '@adonisjs/core/providers/app_provider',
-    '@adonisjs/core/providers/http_provider',
     '@adonisjs/core/providers/hash_provider',
     {
       file: '@adonisjs/core/providers/repl_provider',

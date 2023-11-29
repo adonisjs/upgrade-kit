@@ -6,7 +6,7 @@ import { sessionConfig } from '../src/patchers/config_files/session_config.js'
 
 test.group('Session config', () => {
   test('Update session config', async ({ assert, fs }) => {
-    await fs.addTsConfig()
+    await fs.setupProject({})
 
     await fs.create(
       'config/session.ts',
@@ -15,7 +15,7 @@ test.group('Session config', () => {
       import Application from '@ioc:Adonis/Core/Application'
       import { SessionConfig } from '@ioc:Adonis/Addons/Session'
 
-      const sessionConfig: SessionConfig = {
+      const sessionConfig = {
         enabled: true,
         driver: Env.get('SESSION_DRIVER'),
         cookieName: 'adonis-session',

@@ -13,7 +13,7 @@ test.group('Static config', () => {
       dedent`
       import { AssetsConfig } from '@ioc:Adonis/Core/Static'
 
-      const staticConfig: AssetsConfig = {
+      const staticConfig = {
         enabled: true,
         dotFiles: 'ignore',
         etag: true,

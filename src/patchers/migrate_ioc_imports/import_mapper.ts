@@ -24,7 +24,8 @@ export class ImportMapper {
     return (
       this.shouldBeRewritten(oldModule) &&
       Object.keys(this.#importsMapping[oldModule]).length === 1 &&
-      (!!this.#importsMapping[oldModule]['*'] || !!this.#importsMapping[oldModule]['default'])
+      (!!this.#importsMapping[oldModule]['*'] || !!this.#importsMapping[oldModule]['default']) &&
+      !this.#importsMapping[oldModule]['default']?.isNowNamedImport
     )
   }
 
@@ -62,6 +63,10 @@ export class ImportMapper {
     )
   }
 
+  shouldMoveDefaultToNamedImport(oldModule: string) {
+    return this.#importsMapping[oldModule]['default'].isNowNamedImport
+  }
+
   /**
    * Get the default remapping for the given module
    */
@@ -82,7 +87,6 @@ export class ImportMapper {
   getNewDefaultImportName(oldModule: string) {
     return this.#importsMapping[oldModule]['default'].newName!
   }
-
   /**
    * Get the new module specifier for the given module ( and named import )
    */

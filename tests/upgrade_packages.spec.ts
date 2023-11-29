@@ -4,7 +4,7 @@ import { createRunner } from '../test_helpers/index.js'
 import { upgradePackages } from '../src/patchers/upgrade_packages/index.js'
 
 test.group('Upgrade Packages', (group) => {
-  group.tap((t) => t.timeout(0))
+  group.tap((t) => t.timeout(0).skip(!process.env.CI, 'Only run on CI'))
 
   test('Upgrade installed packages', async ({ assert, fs }) => {
     await fs.addTsConfig()
@@ -144,7 +144,6 @@ test.group('Upgrade Packages', (group) => {
     const rcFile = await fs.contentsJson('.adonisrc.json')
     assert.deepEqual(rcFile.providers, [
       '@adonisjs/core/providers/app_provider',
-      '@adonisjs/core/providers/http_provider',
       '@adonisjs/core/providers/hash_provider',
       {
         file: '@adonisjs/core/providers/repl_provider',

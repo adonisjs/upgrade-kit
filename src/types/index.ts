@@ -32,7 +32,10 @@ export type PatcherFactory = (runner: Runner) => PatcherContract
 /**
  * A map of old import paths to new import paths
  */
-export type ImportMap = Record<string, Record<string, { newPath?: string; newName?: string }>>
+export type ImportMap = Record<
+  string,
+  Record<string, { newPath?: string; newName?: string; isNowNamedImport?: boolean }>
+>
 
 /**
  * Options for the rewriteIocImports patcher

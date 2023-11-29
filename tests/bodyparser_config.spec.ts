@@ -13,7 +13,7 @@ test.group('Bodyparser config', () => {
       dedent`
       import { BodyParserConfig } from '@ioc:Adonis/Core/BodyParser'
 
-      const bodyParserConfig: BodyParserConfig = {
+      const bodyParserConfig = {
         whitelistedMethods: ['POST', 'PUT', 'PATCH', 'DELETE'],
 
         json: {
@@ -53,6 +53,8 @@ test.group('Bodyparser config', () => {
           types: ['multipart/form-data'],
         },
       }
+
+      export default bodyParserConfig
       `
     )
 

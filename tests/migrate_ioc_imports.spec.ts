@@ -136,8 +136,8 @@ test.group('Migrate Ioc Imports', (group) => {
     await fs.create(
       'index.ts',
       dedent`
-        import Event, { AnyHandler } from '@ioc:Adonis/Core/Event'
-        import Logger, { Formatters } from '@ioc:Adonis/Core/Logger'
+        import Event, { AnyHandler } from '@ioc:Adonis/Core/Event';
+        import Logger, { Formatters } from '@ioc:Adonis/Core/Logger';
 
         console.log(Event, AnyHandler, Logger, Formatters)
       `
@@ -175,12 +175,51 @@ test.group('Migrate Ioc Imports', (group) => {
     await assert.fileEquals(
       'index.ts',
       dedent`
-        import emitter from '@adonisjs/core/services/emitter'
-        import logger from '@adonisjs/core/services/logger'
+        import emitter from '@adonisjs/core/services/emitter';
+        import logger from '@adonisjs/core/services/logger';
         import { AnyHandler } from "@adonisjs/core/events";
         import { FormattersNewName } from "@adonisjs/core/logger";
 
         console.log(emitter, AnyHandler, logger, FormattersNewName)
+      `
+    )
+  })
+
+  test('move default import to named import', async ({ assert, fs }) => {
+    await fs.setupProject({})
+
+    await fs.create(
+      'index.ts',
+      dedent`
+        import Event from '@ioc:Adonis/Core/Event'
+
+        console.log(Event)
+      `
+    )
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [
+        migrateIocImports({
+          importMap: {
+            '@ioc:Adonis/Core/Event': {
+              default: {
+                newPath: '@adonisjs/core/services/emitter',
+                newName: 'emitter',
+                isNowNamedImport: true,
+              },
+            },
+          },
+        }),
+      ],
+    }).run()
+
+    await assert.fileEquals(
+      'index.ts',
+      dedent`
+        import { emitter } from "@adonisjs/core/services/emitter";
+
+        console.log(emitter)
       `
     )
   })

@@ -3,7 +3,7 @@ import { createRunner } from '../test_helpers/index.js'
 import { upgradeEslintPrettier } from '../src/patchers/upgrade_eslint_prettier/index.js'
 
 test.group('Upgrade Eslint Prettier', (group) => {
-  group.tap((t) => t.timeout(0))
+  group.tap((t) => t.timeout(0).skip(!process.env.CI, 'Only run on CI'))
 
   test('remove old configuration files', async ({ assert, fs }) => {
     await fs.create('.eslintrc.json', '')

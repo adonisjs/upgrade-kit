@@ -98,6 +98,14 @@ export class MigrateIocImports extends BasePatcher {
     const defaultImport = importDeclaration.getDefaultImport()
     if (defaultImport && this.#importMapper.shouldMoveDefaultImport(mod)) {
       defaultImport.rename(this.#importMapper.getNewDefaultImportName(mod)!)
+      if (this.#importMapper.shouldMoveDefaultToNamedImport(mod)) {
+        file.addImportDeclaration({
+          moduleSpecifier: newSpecifier,
+          namedImports: [{ name: this.#importMapper.getNewDefaultImportName(mod)! }],
+        })
+
+        importDeclaration.removeDefaultImport()
+      }
     }
 
     /**

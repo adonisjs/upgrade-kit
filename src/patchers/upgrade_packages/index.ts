@@ -73,6 +73,7 @@ export class UpgradePackages extends BasePatcher {
       dev: isDev,
       packageManager: this.#pkgManager,
       cwd: this.#rootDir,
+      additionalArgs: ['--force'],
     })
   }
 

@@ -1,6 +1,6 @@
 import { join } from 'node:path'
 import { BasePatcher } from './base_patcher.js'
-import { SourceFile, SyntaxKind } from 'ts-morph'
+import { ObjectLiteralExpression, SourceFile, SyntaxKind } from 'ts-morph'
 import { Node } from 'ts-morph'
 
 export class ConfigUpdaterPatcher extends BasePatcher {
@@ -128,18 +128,19 @@ export class ConfigUpdaterPatcher extends BasePatcher {
       namedImports: [options.driversImport.named],
     })
 
-    const list = config.getPropertyOrThrow('list')
-    if (!Node.isInitializerExpressionGetable(list)) {
-      throw new Error(`Expected config to be a property assignment`)
-    }
-
     /**
      * Some modules want their drivers to be in a `list` property
      * Otherwise they want the drivers to be in the root of the config
      */
-    const literal = options.inList
-      ? list.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression)
-      : config
+    let literal = config
+    if (options.inList) {
+      const list = config.getPropertyOrThrow('list')
+      if (!Node.isInitializerExpressionGetable(list)) {
+        throw new Error(`Expected config to be a property assignment`)
+      }
+
+      literal = list.getInitializerIfKindOrThrow(SyntaxKind.ObjectLiteralExpression)
+    }
 
     /**
      * We loop over each property in the list and replace it with a call to

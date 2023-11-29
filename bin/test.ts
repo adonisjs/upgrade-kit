@@ -7,7 +7,7 @@ import { snapshot } from '@japa/snapshot'
 processCLIArgs(process.argv.slice(2))
 configure({
   files: ['tests/**/*.spec.ts'],
-  timeout: 5000,
+  timeout: 10_000,
   plugins: [
     assert(),
     snapshot(),

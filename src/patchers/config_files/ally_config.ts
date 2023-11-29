@@ -8,7 +8,7 @@ export function allyConfig(): PatcherFactory {
 }
 
 /**
- * Rewrite the config/hash.ts file to use the new API
+ * Rewrite the config/ally.ts file to use the new API
  */
 export class AllyConfig extends ConfigUpdaterPatcher {
   static patcherName = 'ally-config'

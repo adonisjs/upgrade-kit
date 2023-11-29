@@ -104,6 +104,7 @@ export class ConfigUpdaterPatcher extends BasePatcher {
      */
     if (expr && Node.isCallExpression(expr)) {
       const arg = expr.getArguments()[0]
+
       if (arg && Node.isObjectLiteralExpression(arg)) {
         return arg
       }
@@ -116,7 +117,7 @@ export class ConfigUpdaterPatcher extends BasePatcher {
     file: SourceFile
     driversToTransform: string[]
     driversImport: { module: string; named: string }
-    inList?: boolean
+    inList?: boolean | string
   }) {
     const config = this.getConfigExpression(options.file)
 
@@ -134,7 +135,9 @@ export class ConfigUpdaterPatcher extends BasePatcher {
      */
     let literal = config
     if (options.inList) {
-      const list = config.getPropertyOrThrow('list')
+      const list = config.getPropertyOrThrow(
+        typeof options.inList === 'string' ? options.inList : 'list'
+      )
       if (!Node.isInitializerExpressionGetable(list)) {
         throw new Error(`Expected config to be a property assignment`)
       }

@@ -73,7 +73,12 @@ export class Runner {
     this.ui.logger.log('')
 
     for (let patcher of this.#patchers) {
-      await patcher.invoke()
+      try {
+        await patcher.invoke()
+      } catch (error) {
+        this.ui.logger.fatal(`Error while running patcher : ${error.message}`)
+        this.ui.logger.log('')
+      }
     }
 
     await this.project.save()

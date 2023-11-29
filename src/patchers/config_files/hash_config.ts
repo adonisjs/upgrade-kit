@@ -23,7 +23,16 @@ export class HashConfig extends ConfigUpdaterPatcher {
       file,
       oldTypeImport: '@ioc:Adonis/Core/Hash',
       defineConfigImport: '@adonisjs/core/hash',
-      variableName: 'hashConfig',
+    })
+
+    /**
+     * Move to config providers
+     */
+    this.moveToConfigProvider({
+      file,
+      driversImport: { module: '@adonisjs/core/hash', named: 'drivers' },
+      driversToTransform: ['scrypt', 'argon2', 'bcrypt'],
+      inList: true,
     })
 
     /**

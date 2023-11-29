@@ -1,7 +1,7 @@
 import { join } from 'node:path'
+import { Node, SourceFile, SyntaxKind } from 'ts-morph'
+
 import { BasePatcher } from './base_patcher.js'
-import { ObjectLiteralExpression, SourceFile, SyntaxKind } from 'ts-morph'
-import { Node } from 'ts-morph'
 
 export class ConfigUpdaterPatcher extends BasePatcher {
   getConfigFile(path: string) {

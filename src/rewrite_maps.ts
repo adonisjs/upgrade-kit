@@ -58,8 +58,10 @@ export const newImportsMapping: ImportMap = {
     },
   },
   '@ioc:Adonis/Core/HttpExceptionHandler': {
-    '*': {
+    default: {
       newPath: '@adonisjs/core/http',
+      newName: 'ExceptionHandler',
+      isNowNamedImport: true,
     },
   },
   '@ioc:Adonis/Core/HttpContext': {

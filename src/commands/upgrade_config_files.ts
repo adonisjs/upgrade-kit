@@ -8,6 +8,8 @@ import { bodyparserConfig } from '../patchers/config_files/bodyparser_config.js'
 import { databaseConfig } from '../patchers/config_files/database_config.js'
 import { hashConfig } from '../patchers/config_files/hash_config.js'
 import { shieldConfig } from '../patchers/config_files/shield_config.js'
+import { mailConfig } from '../patchers/config_files/mail_config.js'
+import { allyConfig } from '../patchers/config_files/ally_config.js'
 
 export class UpgradeConfigFiles extends BaseCommand {
   static commandName = `upgrade-config-files`
@@ -26,6 +28,8 @@ export class UpgradeConfigFiles extends BaseCommand {
         databaseConfig(),
         hashConfig(),
         shieldConfig(),
+        mailConfig(),
+        allyConfig(),
       ],
       projectPath: this.projectPath,
     }).run()

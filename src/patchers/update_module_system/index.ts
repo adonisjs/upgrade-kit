@@ -27,6 +27,8 @@ export class UpdateModuleSystem extends BasePatcher {
       (type: string) => !type.startsWith('@adonisjs') && !type.startsWith('@japa')
     )
 
+    tsConfig.compilerOptions.strictPropertyInitialization = false
+
     await this.runner.tsConfigFile.save()
     this.logger.info('Updated tsconfig.json with new extends and types')
   }

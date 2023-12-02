@@ -29,6 +29,19 @@ test.group('Update Module System', () => {
     assert.equal(tsConfig.extends, '@adonisjs/tsconfig/tsconfig.app.json')
   })
 
+  test('set strictPropertyInitialization', async ({ assert, fs }) => {
+    await fs.setupProject({})
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [updateModuleSystem()],
+    }).run()
+
+    const tsConfig = await fs.contentsJson('tsconfig.json')
+
+    assert.equal(tsConfig.compilerOptions.strictPropertyInitialization, false)
+  })
+
   test('remove adonisjs and japa types from tsconfig', async ({ assert, fs }) => {
     await fs.setupProject({
       tsconfig: {

@@ -31,14 +31,14 @@ export class UpgradePackages extends BasePatcher {
     { old: 'phc-bcrypt', name: 'bcrypt', isDev: false },
     { old: '@japa/preset-adonis', name: '@japa/plugin-adonisjs', isDev: true },
     { old: 'adonis-preset-ts', name: '@adonisjs/tsconfig', isDev: true },
-    { old: '@adonisjs/view', name: 'edge.js@next', isDev: false },
+    { old: '@adonisjs/view', name: 'edge.js', isDev: false },
   ]
   #packagesToAdd = [
     { name: 'ts-node', isDev: true },
     { name: '@swc/core', isDev: true },
     { name: '@types/luxon', isDev: true },
     { name: '@adonisjs/tsconfig', isDev: true },
-    { name: '@adonisjs/validator@next', isDev: false },
+    { name: '@adonisjs/validator', isDev: false },
   ]
   #packagesToUpgrade = [
     { name: '@adonisjs/assembler', isDev: true },
@@ -99,13 +99,7 @@ export class UpgradePackages extends BasePatcher {
       installedPackages.includes(pkg.name)
     )
 
-    const pkgWithVersions = pkgToUpgrades.map((pkg) => {
-      if (pkg.name.startsWith('@japa') || pkg.name.startsWith('@adonisjs')) {
-        return { name: `${pkg.name}@next`, isDev: pkg.isDev }
-      }
-
-      return { name: `${pkg.name}@latest`, isDev: pkg.isDev }
-    })
+    const pkgWithVersions = pkgToUpgrades.map((pkg) => ({ name: `${pkg.name}@latest`, isDev: pkg.isDev }))
 
     const { devPackages: devPackagesNamesToUpgrade, prodPackages: prodPackagesNamesToUpgrade } =
       this.#filterDevAndProdPackages(pkgWithVersions)
@@ -140,7 +134,7 @@ export class UpgradePackages extends BasePatcher {
     const { devPackages, prodPackages } = this.#filterDevAndProdPackages(this.#packagesToAdd)
 
     const hasCorsConfig = project.getSourceFile(join(this.#rootDir, 'config/cors.ts'))
-    if (hasCorsConfig) prodPackages.push('@adonisjs/cors@next')
+    if (hasCorsConfig) prodPackages.push('@adonisjs/cors')
 
     const hasStaticConfig = project.getSourceFile(join(this.#rootDir, 'config/static.ts'))
     if (hasStaticConfig) prodPackages.push('@adonisjs/static')

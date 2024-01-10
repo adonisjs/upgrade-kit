@@ -88,6 +88,13 @@ export class UpgradeAliases extends BasePatcher {
     )
   }
 
+  async #removeOldTsPaths() {
+    this.runner.tsConfigFile.removePaths(['App/*', 'Contracts/*', 'Config/*', 'Database/*'])
+
+    await this.runner.tsConfigFile.save()
+    this.logger.info('Removed old tsconfig.json `compilerOptions.paths`')
+  }
+
   /**
    * Update the different config files with new paths
    */
@@ -150,6 +157,7 @@ export class UpgradeAliases extends BasePatcher {
     }
 
     await this.#updateConfigsWithNewPaths()
+    await this.#removeOldTsPaths()
     this.exit()
   }
 }

@@ -22,6 +22,28 @@ test.group('Upgrade aliases', () => {
     await assert.fileEquals('.adonisrc.json', '{}')
   })
 
+  test('remove aliases from tsconfig', async ({ assert, fs }) => {
+    await fs.setupProject({
+      tsconfig: {
+        compilerOptions: {
+          paths: {
+            App: ['./app/*'],
+            Contracts: ['./contracts/*'],
+          },
+        },
+      },
+    })
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [upgradeAliases()],
+    }).run()
+
+    const tsConfig = await fs.contentsJson('tsconfig.json')
+    assert.isUndefined(tsConfig.compilerOptions.paths['App/*'])
+    assert.isUndefined(tsConfig.compilerOptions.paths['Contracts/*'])
+  })
+
   test('append default subpath to tsconfig and pkg json', async ({ assert, fs }) => {
     await fs.setupProject({
       tsconfig: {

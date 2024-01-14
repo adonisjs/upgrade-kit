@@ -76,7 +76,7 @@ export class Runner {
       try {
         await patcher.invoke()
       } catch (error) {
-        this.ui.logger.fatal(`Error while running patcher : ${error.message}`)
+        this.ui.logger.fatal(`Error while running patcher : ${error.message}, ${error.stack}`)
         this.ui.logger.log('')
       }
     }

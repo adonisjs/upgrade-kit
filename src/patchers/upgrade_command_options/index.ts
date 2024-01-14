@@ -13,7 +13,9 @@ export class UpgradeCommandOptions extends BasePatcher {
   async invoke() {
     super.invoke()
 
-    const tsFiles = this.project.getSourceFiles('**/*/commands/**/*.ts')
+    const tsFiles = this.project
+      .getSourceFiles()
+      .filter((file) => file.getFilePath().match(/commands\/.*\.ts$/))
 
     for (let tsFile of tsFiles) {
       const defaultExport = tsFile.getDefaultExportSymbol()
@@ -28,9 +30,11 @@ export class UpgradeCommandOptions extends BasePatcher {
         ?.getDescendantsOfKind(SyntaxKind.PropertyDeclaration)
         ?.find((node) => node.getName() === 'settings')
 
-      if (!commandSettings) {
+      if (!commandSettings || !commandClass) {
         return
       }
+
+      const settingsIndex = commandClass.getMembers().indexOf(commandSettings)
 
       /**
        * Get loadApp and stayAlive from `settings`
@@ -46,7 +50,7 @@ export class UpgradeCommandOptions extends BasePatcher {
       /**
        * Replace `settings` with `options` and keep old values
        */
-      commandClass?.addProperty({
+      commandClass!.insertProperty(settingsIndex, {
         name: 'options: CommandOptions',
         initializer: dedent`{
           loadApp: ${loadApp?.getText().includes('true') ? 'true' : 'false'},

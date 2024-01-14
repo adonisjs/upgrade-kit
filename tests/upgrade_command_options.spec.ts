@@ -15,6 +15,8 @@ test.group('Upgrade Command Options', () => {
           loadApp: false,
           stayAlive: false,
         }
+
+        foo() {}
       }
     `
     )
@@ -23,10 +25,15 @@ test.group('Upgrade Command Options', () => {
       'commands/foo/bar.ts',
       dedent`
       export default class TestCommandBar extends BaseCommand {
+
+        a() {}
+
         public static settings = {
           loadApp: true,
           stayAlive: false,
         }
+
+        b() {}
       }
     `
     )
@@ -47,16 +54,23 @@ test.group('Upgrade Command Options', () => {
                 loadApp: false,
                 staysAlive: false,
               };
+
+        foo() {}
       }"
     `)
     assert.snapshot(fooBarCommand).matchInline(`
       "import { CommandOptions } from \\"@adonisjs/core/types/ace\\";
 
       export default class TestCommandBar extends BaseCommand {
+
+        a() {}
+
           static options: CommandOptions = {
                 loadApp: true,
                 staysAlive: false,
               };
+
+        b() {}
       }"
     `)
   })

@@ -21,6 +21,7 @@ export class SessionConfig extends ConfigUpdaterPatcher {
       file,
       oldTypeImport: '@ioc:Adonis/Addons/Session',
       defineConfigImport: '@adonisjs/session',
+      helperName: 'sessionConfig',
     })
 
     await this.formatFile(file).save()

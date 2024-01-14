@@ -15,6 +15,14 @@ export const newImportsMapping: ImportMap = {
       newName: 'BaseCommand',
       newPath: '@adonisjs/core/ace',
     },
+    'args': {
+      newName: 'args',
+      newPath: '@adonisjs/core/ace',
+    },
+    'flags': {
+      newName: 'flags',
+      newPath: '@adonisjs/core/ace',
+    },
     'Exception': {
       newPath: '@adonisjs/core/exceptions',
     },
@@ -110,7 +118,7 @@ export const newImportsMapping: ImportMap = {
   },
   '@ioc:Adonis/Core/BodyParser': {
     '*': {
-      newPath: '@adonisjs/bodyparser',
+      newPath: '@adonisjs/core/bodyparser',
     },
   },
 
@@ -342,9 +350,12 @@ export const newImportsMapping: ImportMap = {
     },
   },
   '@ioc:Adonis/Lucid/Database': {
-    default: {
+    'default': {
       newName: 'db',
       newPath: '@adonisjs/lucid/services/db',
+    },
+    '*': {
+      newPath: '@adonisjs/lucid/database',
     },
   },
   '@ioc:Adonis/Lucid/Orm': {

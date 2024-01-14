@@ -21,11 +21,17 @@ export class ImportMapper {
    * and no named imports need to be renamed or moved
    */
   shouldOnlyRenameModuleSpecifier(oldModule: string) {
+    const rewriteMapEntry = this.#importsMapping[oldModule]
+    const entryHasOnlyOneKey = Object.keys(rewriteMapEntry).length === 1
+    const entryHasDefaultKey = !!rewriteMapEntry['default']
+    const entryHasWildcardKey = !!rewriteMapEntry['*']
+    const isNowNamedImport = rewriteMapEntry['default']?.isNowNamedImport
+
     return (
       this.shouldBeRewritten(oldModule) &&
-      Object.keys(this.#importsMapping[oldModule]).length === 1 &&
-      (!!this.#importsMapping[oldModule]['*'] || !!this.#importsMapping[oldModule]['default']) &&
-      !this.#importsMapping[oldModule]['default']?.isNowNamedImport
+      entryHasOnlyOneKey &&
+      (entryHasDefaultKey || entryHasWildcardKey) &&
+      !isNowNamedImport
     )
   }
 

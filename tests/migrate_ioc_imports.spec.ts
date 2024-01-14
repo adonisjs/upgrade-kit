@@ -185,6 +185,49 @@ test.group('Migrate Ioc Imports', (group) => {
     )
   })
 
+  test('rewrite default imports 2', async ({ assert, fs }) => {
+    await fs.setupProject({})
+
+    await fs.create(
+      'index.ts',
+      dedent`
+      import Database from '@ioc:Adonis/Lucid/Database'
+
+      export default class GetDownloadsAction {
+        public async execute() {
+          const data = await Database.from('downloads_metrics')
+            .select(Database.raw("date_trunc('day', created_at) as date"))
+            .sum('downloads as downloads')
+            .groupByRaw("date_trunc('day', created_at)")
+            .orderBy('date', 'asc')
+
+          return data as { date: string; downloads: string }[]
+        }
+      }`
+    )
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [
+        migrateIocImports({
+          importMap: {
+            '@ioc:Adonis/Lucid/Database': {
+              'default': {
+                newName: 'db',
+                newPath: '@adonisjs/lucid/services/db',
+              },
+              '*': {
+                newPath: '@adonisjs/lucid/services/db',
+              },
+            },
+          },
+        }),
+      ],
+    }).run()
+
+    await assert.fileContains('index.ts', `import db from '@adonisjs/lucid/services/db'`)
+  })
+
   test('move default import to named import', async ({ assert, fs }) => {
     await fs.setupProject({})
 

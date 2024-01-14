@@ -99,7 +99,10 @@ export class UpgradePackages extends BasePatcher {
       installedPackages.includes(pkg.name)
     )
 
-    const pkgWithVersions = pkgToUpgrades.map((pkg) => ({ name: `${pkg.name}@latest`, isDev: pkg.isDev }))
+    const pkgWithVersions = pkgToUpgrades.map((pkg) => ({
+      name: `${pkg.name}@latest`,
+      isDev: pkg.isDev,
+    }))
 
     const { devPackages: devPackagesNamesToUpgrade, prodPackages: prodPackagesNamesToUpgrade } =
       this.#filterDevAndProdPackages(pkgWithVersions)

@@ -20,6 +20,7 @@ export class ConfigUpdaterPatcher extends BasePatcher {
     oldTypeImport: string
     defineConfigImport: string
     variableName?: string
+    helperName?: string
   }) {
     /**
      * Remove old config typing import statement
@@ -36,6 +37,29 @@ export class ConfigUpdaterPatcher extends BasePatcher {
       moduleSpecifier: options.defineConfigImport,
       namedImports: ['defineConfig'],
     })
+
+    if (options.helperName) {
+      const oldHelperImport = options.file.getImportDeclarations().find((imp) => {
+        return imp.getNamedImports().find((named) => named.getName() === options.helperName)
+      })
+
+      if (oldHelperImport) oldHelperImport.remove()
+
+      let replacedWithDefineConfig = false
+      options.file.forEachDescendant((node) => {
+        if (!Node.isCallExpression(node)) return
+        const expression = node.getExpression()
+        if (Node.isIdentifier(expression) && expression.getText() === options.helperName) {
+          const args = node.getArguments()
+          node.replaceWithText(`defineConfig(${args[0].getText()})`)
+          replacedWithDefineConfig = true
+        }
+      })
+
+      if (replacedWithDefineConfig) {
+        return
+      }
+    }
 
     /**
      * Replace the simple Object Literal with a defineConfig call
@@ -86,6 +110,8 @@ export class ConfigUpdaterPatcher extends BasePatcher {
         const initializer = variableDeclaration.getInitializerIfKind(
           SyntaxKind.ObjectLiteralExpression
         )
+
+        variableDeclaration.removeType()
 
         if (initializer) return initializer
 

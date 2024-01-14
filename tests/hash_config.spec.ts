@@ -50,7 +50,7 @@ test.group('Hash config', () => {
       import { defineConfig } from \\"@adonisjs/core/hash\\";
       import { drivers } from \\"@adonisjs/core/hash\\";
 
-      const hashConfig: HashConfig = defineConfig({
+      const hashConfig = defineConfig({
         default: Env.get('HASH_DRIVER', 'argon'),
 
         list: {
@@ -133,6 +133,75 @@ test.group('Hash config', () => {
           }),
 
           test2: drivers.bcrypt({
+            rounds: 10,
+          }),
+        },
+      })
+
+      declare module '@adonisjs/core/types' {
+        export interface HashersList extends InferHashers<typeof hashConfig> { }
+      }
+      "
+    `)
+  })
+
+  test('with hashConfig helper', async ({ assert, fs }) => {
+    await fs.setupProject({})
+
+    await fs.create(
+      'config/hash.ts',
+      dedent`
+      import Env from '@ioc:Adonis/Core/Env'
+      import { hashConfig } from '@adonisjs/core/build/config'
+      import { HashConfig } from '@ioc:Adonis/Core/Hash'
+
+      export default hashConfig({
+        default: Env.get('HASH_DRIVER', 'argon'),
+
+        list: {
+          argon: {
+            driver: 'argon2',
+            variant: 'id',
+            iterations: 3,
+            memory: 4096,
+            parallelism: 1,
+            saltSize: 16,
+          },
+
+          bcrypt: {
+            driver: 'bcrypt',
+            rounds: 10,
+          },
+        },
+      })
+      `
+    )
+
+    await createRunner({
+      projectPath: fs.basePath,
+      patchers: [hashConfig()],
+    }).run()
+
+    const content = await fs.contents('config/hash.ts')
+
+    assert.snapshot(content).matchInline(`
+      "import Env from '@ioc:Adonis/Core/Env'
+      import { defineConfig } from \\"@adonisjs/core/hash\\";
+      import { drivers } from \\"@adonisjs/core/hash\\";
+
+      export default defineConfig({
+        default: Env.get('HASH_DRIVER', 'argon'),
+
+        list: {
+          argon: drivers.argon2({
+            variant: 'id',
+            iterations: 3,
+            memory: 4096,
+            parallelism: 1,
+            saltSize: 16,
+          }),
+
+          bcrypt: drivers.bcrypt({
             rounds: 10,
           }),
         },

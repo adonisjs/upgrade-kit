@@ -23,6 +23,7 @@ export class HashConfig extends ConfigUpdaterPatcher {
       file,
       oldTypeImport: '@ioc:Adonis/Core/Hash',
       defineConfigImport: '@adonisjs/core/hash',
+      helperName: 'hashConfig',
     })
 
     /**

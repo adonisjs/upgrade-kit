@@ -45,7 +45,7 @@ test.group('Ally config', () => {
       import { defineConfig } from \\"@adonisjs/ally\\";
       import { services } from \\"@adonisjs/ally\\";
 
-      const allyConfig: AllyConfig = defineConfig({
+      const allyConfig = defineConfig({
         github: drivers.github({
           clientId: Env.get('GITHUB_CLIENT_ID'),
           clientSecret: Env.get('GITHUB_CLIENT_SECRET'),

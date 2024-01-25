@@ -23,7 +23,7 @@ test.group('Upgrade Packages', (group) => {
 
     const pkgJson = await fs.contentsJson('package.json')
 
-    assert.isTrue(pkgJson.dependencies['@adonisjs/limiter'].startsWith('5'))
+    assert.isTrue(pkgJson.dependencies['@adonisjs/limiter'].startsWith('^5'))
   })
 
   test('Upgrade installed packages', async ({ assert, fs }) => {

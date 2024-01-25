@@ -6,6 +6,26 @@ import { upgradePackages } from '../src/patchers/upgrade_packages/index.js'
 test.group('Upgrade Packages', (group) => {
   group.tap((t) => t.timeout(0).skip(!process.env.CI, 'Only run on CI'))
 
+  test('Skip when not available packages are installed', async ({ assert, fs }) => {
+    await fs.addTsConfig()
+    await fs.addRcFile()
+    await fs.addPackageJsonFile({
+      dependencies: {
+        '@adonisjs/limiter': '^5.0.0',
+      },
+    })
+
+    const runner = createRunner({
+      projectPath: fs.basePath,
+      patchers: [upgradePackages({ packageManager: 'pnpm' })],
+    })
+    await runner.run()
+
+    const pkgJson = await fs.contentsJson('package.json')
+
+    assert.isTrue(pkgJson.dependencies['@adonisjs/limiter'].startsWith('5'))
+  })
+
   test('Upgrade installed packages', async ({ assert, fs }) => {
     await fs.addTsConfig()
     await fs.addRcFile()

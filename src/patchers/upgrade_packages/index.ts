@@ -233,10 +233,12 @@ export class UpgradePackages extends BasePatcher {
     const notAvailablePackages = this.#detectNotAvailablePackages()
 
     if (notAvailablePackages.length > 0) {
-      this.logger.warning(
-        `The following packages are not available for AdonisJS v6: ${notAvailablePackages
+      this.logger.error(
+        `The following packages are not available yet for AdonisJS v6: \n - ${notAvailablePackages
           .map((pkg) => pkg.name)
-          .join(', ')}`
+          .join(
+            '\n - '
+          )}\nPlease wait a few weeks for the packages to be updated.\nSee : https://v6-migration.adonisjs.com/guides/introduction#official-packages-not-yet-compatible-with-v6`
       )
 
       return

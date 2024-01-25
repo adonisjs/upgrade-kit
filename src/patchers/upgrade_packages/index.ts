@@ -41,6 +41,7 @@ export class UpgradePackages extends BasePatcher {
     { name: '@adonisjs/validator', isDev: false },
   ]
   #packagesToUpgrade = [
+    { name: '@adonisjs/auth', isDev: false },
     { name: '@adonisjs/assembler', isDev: true },
     { name: '@adonisjs/core', isDev: false },
     { name: '@adonisjs/lucid', isDev: false },

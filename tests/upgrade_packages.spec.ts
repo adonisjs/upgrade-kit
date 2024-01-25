@@ -48,7 +48,7 @@ test.group('Upgrade Packages', (group) => {
     const pkgJson = await fs.contentsJson('package.json')
 
     assert.isTrue(pkgJson.dependencies['@adonisjs/core'].startsWith('^6'))
-    assert.isTrue(pkgJson.devDependencies['@adonisjs/assembler'].startsWith('^6'))
+    assert.isTrue(pkgJson.devDependencies['@adonisjs/assembler'].startsWith('^7'))
     assert.isTrue(pkgJson.devDependencies['pino-pretty'].startsWith('^10'))
   })
 

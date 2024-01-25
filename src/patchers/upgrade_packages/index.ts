@@ -24,6 +24,14 @@ export class UpgradePackages extends BasePatcher {
   #rootDir!: string
   #skipInstall = false
 
+  #packageNotAvailable = [
+    { name: '@adonisjs/drive' },
+    { name: '@adonisjs/limiter' },
+    { name: '@adonisjs/attachment-lite' },
+    { name: '@adonisjs/lucid-slugify' },
+    { name: '@adonisjs/route-model-binding' },
+  ]
+
   #packagesToRemove = ['@adonisjs/repl', 'source-map-support', 'youch', 'youch-terminal']
 
   #packagesToSwap = [
@@ -60,6 +68,12 @@ export class UpgradePackages extends BasePatcher {
 
     this.#pkgManager = packageManager
     this.#skipInstall = skipInstall ?? false
+  }
+
+  #detectNotAvailablePackages() {
+    const installedPackages = this.runner.pkgJsonFile.getInstalledPackages()
+
+    return this.#packageNotAvailable.filter((pkg) => installedPackages.includes(pkg.name))
   }
 
   #filterDevAndProdPackages(packages: Array<{ name: string; isDev: boolean }>) {
@@ -216,6 +230,20 @@ export class UpgradePackages extends BasePatcher {
 
     this.#rootDir = this.runner.project.getRootDirectories()[0].getPath()
     if (!this.#pkgManager) this.#pkgManager = (await detectPackageManager(this.#rootDir)) ?? 'pnpm'
+
+    const notAvailablePackages = this.#detectNotAvailablePackages()
+
+    if (notAvailablePackages.length > 0) {
+      this.logger.error(
+        `The following packages are not available yet for AdonisJS v6: \n - ${notAvailablePackages
+          .map((pkg) => pkg.name)
+          .join(
+            '\n - '
+          )}\nPlease wait a few weeks for the packages to be updated.\nSee : https://v6-migration.adonisjs.com/guides/introduction#official-packages-not-yet-compatible-with-v6`
+      )
+
+      return
+    }
 
     if (!this.#skipInstall) {
       await this.#upgradePackages()

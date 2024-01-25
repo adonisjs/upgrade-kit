@@ -8,14 +8,9 @@
   "main": "build/index.js",
   "type": "module",
   "files": [
-    "src",
-    "providers",
-    "index.ts",
-    "build/src",
-    "build/stubs",
-    "build/bin",
-    "build/index.d.ts",
-    "build/index.js"
+    "build",
+    "!build/test_helpers",
+    "!build/tests"
   ],
   "bin": {
     "adonis-upgrade-kit": "build/bin/run.js"

@@ -52,6 +52,7 @@ export class UpgradeEslintPrettier extends BasePatcher {
       ['@adonisjs/eslint-config', '@adonisjs/prettier-config', 'eslint@latest', 'prettier@latest'],
       {
         packageManager: this.#pkgManager,
+        additionalArgs: ['--force'],
         dev: true,
         cwd: rootDir,
         silent: false,

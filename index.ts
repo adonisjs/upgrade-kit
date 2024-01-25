@@ -1,5 +1,6 @@
 import { Kernel, ListLoader } from '@adonisjs/ace'
 
+import { Version } from './src/commands/version.js'
 import { UpgradeRcFile } from './src/commands/upgrade_rc_file.js'
 import { UpgradeAliases } from './src/commands/upgrade_aliases.js'
 import { UpgradePackages } from './src/commands/upgrade_packages.js'
@@ -25,5 +26,6 @@ export const kernel = Kernel.create().addLoader(
     UpgradeEslintPrettier,
     UpgradeConfigFiles,
     UpgradeCommandOptions,
+    Version,
   ])
 )

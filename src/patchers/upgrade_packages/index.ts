@@ -78,7 +78,7 @@ export class UpgradePackages extends BasePatcher {
   }
 
   async #removePackages(packages: string[]) {
-    await execa(this.#pkgManager!, ['remove', ...packages], { cwd: this.#rootDir })
+    await execa(this.#pkgManager!, ['remove', ...packages, '--force'], { cwd: this.#rootDir })
   }
 
   async #replacePackages(entries: Array<{ old: string; name: string }>, isDev: boolean) {

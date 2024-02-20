@@ -222,6 +222,46 @@ export const newImportsMapping: ImportMap = {
 
   /**
    * ------------------------------------------------------
+   * Limiter
+   * ------------------------------------------------------
+   */
+  '@adonisjs/limiter/build/services': {
+    'Limiter': {
+      newName: 'limiter',
+      newPath: '@adonisjs/limiter/services/main',
+      isNowNamedImport: true,
+    },
+
+    '*': {
+      newPath: '@adonisjs/limiter',
+    },
+  },
+
+  '@adonisjs/limiter/build/config': {
+    'limiterConfig': {
+      newName: 'defineConfig',
+      newPath: '@adonisjs/limiter',
+    },
+
+    '*': {
+      newPath: '@adonisjs/limiter',
+    },
+  },
+
+  '@adonisjs/limiter/build/services/index': {
+    'Limiter': {
+      newName: 'limiter',
+      newPath: '@adonisjs/limiter/services/main',
+      isNowNamedImport: true,
+    },
+
+    '*': {
+      newPath: '@adonisjs/limiter',
+    },
+  },
+
+  /**
+   * ------------------------------------------------------
    * Ally
    * ------------------------------------------------------
    */

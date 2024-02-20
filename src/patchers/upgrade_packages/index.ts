@@ -26,7 +26,6 @@ export class UpgradePackages extends BasePatcher {
 
   #packageNotAvailable = [
     { name: '@adonisjs/drive' },
-    { name: '@adonisjs/limiter' },
     { name: '@adonisjs/attachment-lite' },
     { name: '@adonisjs/lucid-slugify' },
     { name: '@adonisjs/route-model-binding' },
@@ -53,6 +52,7 @@ export class UpgradePackages extends BasePatcher {
     { name: '@adonisjs/assembler', isDev: true },
     { name: '@adonisjs/core', isDev: false },
     { name: '@adonisjs/lucid', isDev: false },
+    { name: '@adonisjs/limiter', isDev: false },
     { name: '@adonisjs/session', isDev: false },
     { name: '@adonisjs/shield', isDev: false },
     { name: '@adonisjs/redis', isDev: false },

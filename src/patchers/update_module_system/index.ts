@@ -29,8 +29,8 @@ export class UpdateModuleSystem extends BasePatcher {
 
     tsConfig.compilerOptions.strictPropertyInitialization = false
 
-    tsConfig.compilerOptions.module = 'Node16'
-    tsConfig.compilerOptions.moduleResolution = 'Node16'
+    delete tsConfig.compilerOptions.module
+    delete tsConfig.compilerOptions.moduleResolution
 
     await this.runner.tsConfigFile.save()
     this.logger.info('Updated tsconfig.json with new extends and types')

@@ -29,6 +29,8 @@ export class UpdateModuleSystem extends BasePatcher {
 
     tsConfig.compilerOptions.strictPropertyInitialization = false
 
+    tsConfig.compilerOptions.module = 'ES2022'
+
     await this.runner.tsConfigFile.save()
     this.logger.info('Updated tsconfig.json with new extends and types')
   }

@@ -51,6 +51,7 @@ export class UpgradePackages extends BasePatcher {
     { name: '@adonisjs/auth', isDev: false },
     { name: '@adonisjs/assembler', isDev: true },
     { name: '@adonisjs/core', isDev: false },
+    { name: '@adonisjs/i18n', isDev: false },
     { name: '@adonisjs/lucid', isDev: false },
     { name: '@adonisjs/limiter', isDev: false },
     { name: '@adonisjs/session', isDev: false },

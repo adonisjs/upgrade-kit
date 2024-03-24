@@ -542,4 +542,5 @@ export const providersRewriteMapping = {
   '@adonisjs/ally': ['@adonisjs/ally/ally_provider'],
   '@adonisjs/lucid': ['@adonisjs/lucid/database_provider'],
   '@adonisjs/auth': ['@adonisjs/auth/auth_provider'],
+  '@adonisjs/i18n': ['@adonisjs/i18n/i18n_provider'],
 } as Record<string, (string | { file: string; environment: string[] })[]>

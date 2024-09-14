@@ -25,7 +25,6 @@ export class UpgradePackages extends BasePatcher {
   #skipInstall = false
 
   #packageNotAvailable = [
-    { name: '@adonisjs/drive' },
     { name: '@adonisjs/attachment-lite' },
     { name: '@adonisjs/lucid-slugify' },
     { name: '@adonisjs/route-model-binding' },

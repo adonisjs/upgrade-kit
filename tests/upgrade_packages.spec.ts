@@ -29,7 +29,7 @@ test.group('Upgrade Packages', (group) => {
 
     assert.isTrue(pkgJson.dependencies['@adonisjs/core'].startsWith('^6'))
     assert.isTrue(pkgJson.devDependencies['@adonisjs/assembler'].startsWith('^7'))
-    assert.isTrue(pkgJson.devDependencies['pino-pretty'].startsWith('^10'))
+    assert.isTrue(pkgJson.devDependencies['pino-pretty'].startsWith('^11'))
   })
 
   test('remove deprecated packages', async ({ assert, fs }) => {

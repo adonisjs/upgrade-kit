@@ -51,7 +51,7 @@ test.group('Upgrade Command Options', () => {
 
       export default class TestCommand extends BaseCommand {
           static options: CommandOptions = {
-                loadApp: false,
+                startApp: false,
                 staysAlive: false,
               };
 
@@ -66,7 +66,7 @@ test.group('Upgrade Command Options', () => {
         a() {}
 
           static options: CommandOptions = {
-                loadApp: true,
+                startApp: true,
                 staysAlive: false,
               };
 

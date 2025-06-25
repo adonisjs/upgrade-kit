@@ -48,12 +48,12 @@ export class UpgradeCommandOptions extends BasePatcher {
         ?.getProperty('stayAlive')
 
       /**
-       * Replace `settings` with `options` and keep old values
+       * Replace `settings` with `options`, `loadApp` with `startApp` and keep `staysAlive` value
        */
       commandClass!.insertProperty(settingsIndex, {
         name: 'options: CommandOptions',
         initializer: dedent`{
-          loadApp: ${loadApp?.getText().includes('true') ? 'true' : 'false'},
+          startApp: ${loadApp?.getText().includes('true') ? 'true' : 'false'},
           staysAlive: ${stayAlive?.getText().includes('true') ? 'true' : 'false'},
         }`,
         isStatic: true,
